@@ -1,0 +1,122 @@
+.hero{
+    background: url('../../../assets/images/header.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.hero *{
+ font-family: 'Montserrat', sans-serif;;
+}
+.hero-cover{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: rgba(17, 0, 34, 0.7);
+}
+.hero-text{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 6rem;
+    margin-bottom: 3rem;
+}
+.site-large-title {
+    background: -webkit-linear-gradient(#EE076E, #F81F01);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Montserrat', sans-serif;;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 5rem;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+    text-transform: uppercase;
+
+  }
+  .hero-text h2{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2.5rem;
+    line-height: 30px;
+    color: #C6C9D8;
+  }
+
+  .hero-icon-sections{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0 6rem; 
+  }
+  .icon-container{
+    max-width: 22rem;
+    color: white;
+    margin-top: 3rem;
+    margin-bottom: 10rem;
+  }
+  .icon-container h3{
+      margin: 2rem 0;
+  }
+
+  .about{
+      display: flex;
+      height: 80vh;
+      width: 100%;
+  }
+  .section-container{
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      
+  }
+  .about-image{
+      flex: 1.5;
+      height: 30rem;
+      margin-top: -4.5rem;
+      
+  }
+  .about-image img{
+    height: 100%;
+    width: 100%;
+    filter: drop-shadow(0px 25px 65px rgba(0, 0, 0, 0.1));
+    border-radius: 8px;
+  }
+  .about-text-content{
+      flex: 3;
+      margin: 0 3rem;
+      padding-top: 3.5rem;
+  }
+
+  .about-sub-heading{
+      display: flex;
+      flex-direction: row;
+      margin-top: 2.5rem;
+      justify-content: space-between;
+      
+  }
+  .about-sub-heading .content{
+      max-width: 20rem;
+  }
+  .content h3{
+    color: #F81F01;
+    font-weight: 200;
+    padding-bottom: 0.5rem;
+  }
+.heading h2{
+      color: #F81F01;
+      font-weight: 400;
+      padding-bottom: 0.5rem;
+  }
