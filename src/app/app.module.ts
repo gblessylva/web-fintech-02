@@ -13,6 +13,10 @@ import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { HowWorksSectionComponent } from './components/how-works-section/how-works-section.component';
+import { BeneficiariesComponent } from './components/beneficiaries/beneficiaries.component';
+import { FunFactsComponent } from './components/fun-facts/fun-facts.component';
+import { BlogSectionComponent } from './components/blog-section/blog-section.component';
 
 
 @NgModule({
@@ -26,7 +30,11 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     ContactComponent,
     LoginComponent,
     SignupComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    HowWorksSectionComponent,
+    BeneficiariesComponent,
+    FunFactsComponent,
+    BlogSectionComponent
   ],
   imports: [
     BrowserModule,

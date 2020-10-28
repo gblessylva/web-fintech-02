@@ -3,7 +3,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 110vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 110vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -24,9 +24,9 @@
 .hero-text{
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding-left: 6rem;
-    margin-bottom: 3rem;
+    margin-top: 1rem;
 }
 .site-large-title {
     background: -webkit-linear-gradient(#EE076E, #F81F01);
@@ -40,17 +40,39 @@
     margin-bottom: 2rem;
     margin-top: 3rem;
     text-transform: uppercase;
+  }
+  .dashboard-image{
+    perspective: 500px;
+    -webkit-perspective: 500px;
+    height: 20rem;
+    max-width: 30rem;
+    margin-left: 5rem;
+    
 
   }
+  .dashboard-image img{
+      height: 100%;
+      width: 100%;
+      display: block;
+      transform: rotateY(-25deg);
+    transform-origin: 50% 50% 0px;  
+    filter: drop-shadow(0px 25px 95px rgba(0, 0, 0, 0.548));
+    transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+    
+  }
+  .dashboard-image img:hover{
+    transform: rotateY(0deg);
+    filter:drop-shadow(0px 0px 0px  #F81F01); 
+  }
   .hero-text h2{
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 2.5rem;
     line-height: 30px;
     color: #C6C9D8;
   }
-
+  
   .hero-icon-sections{
       display: flex;
       flex-direction: row;
@@ -83,16 +105,20 @@
       
   }
   .about-image{
+      background-color: #C6C9D8;
       flex: 1.5;
       height: 30rem;
       margin-top: -4.5rem;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      border-radius: 10px;
       
   }
   .about-image img{
     height: 100%;
     width: 100%;
-    filter: drop-shadow(0px 25px 65px rgba(0, 0, 0, 0.1));
-    border-radius: 8px;
+    filter: drop-shadow(0px 25px 65px rgba(0, 0, 0, 0.548));
+    border-radius: 10px;
+    
   }
   .about-text-content{
       flex: 3;
@@ -120,3 +146,21 @@
       font-weight: 400;
       padding-bottom: 0.5rem;
   }
+
+  .css_transform { 
+      width: 200px;
+      height: 200px;
+      border: 1px #000 solid;
+      background-color: rgba(255,245,0,0.5);
+      line-height: 200px;
+      text-align:center;
+ 
+      -webkit-transform: rotateY(-31deg);
+         -moz-transform: rotateY(-31deg);
+              transform: rotateY(-31deg);
+ 
+      -webkit-transform-origin: 50% 50% 0px;
+         -moz-transform-origin: 50% 50% 0px;
+              transform-origin: 50% 50% 0px;
+ 
+  } 
