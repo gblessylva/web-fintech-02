@@ -4,16 +4,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './components/about/about.component';
 // import { HeroComponent } from './components/hero/hero.component';
 import { HomeComponent } from './components/home/home.component';
-import { HeaderComponent } from './components/header/header.component';
+// import { HeaderComponent } from './components/header/header.component';
 // import { FooterComponent } from './components/footer/footer.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { DefaultComponent } from './components/default/default.component';
 // import { NotfoundComponent } from './components/notfound/notfound.component';
 
 const route: Routes = [
 
-      { path: '', component: HeaderComponent },
+      { path: '', component: DefaultComponent },
       { path: 'Home', component: HomeComponent},
       { path: 'About', component: AboutComponent},
       { path: 'Contact', component: ContactComponent},
