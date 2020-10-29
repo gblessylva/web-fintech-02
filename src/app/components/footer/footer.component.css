@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap');
+*{
+    font-size: 62.5%;
+}
+footer{
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+    font-family: 'Poppins' sans-serif;
+    align-items:flex-end;
+}
+footer p, footer a, footer li{
+    font-size: 1rem;
+    list-style: none;
+    text-decoration: none;
+    color: #C6C9D8;
+    margin-bottom: 1rem;
+}
+footer li:hover, footer a:hover{
+    color: #b2b2b6;
+    cursor: pointer;
+}
+.quicklinks{
+    flex: 1;
+    background: url('../../../assets/images/header.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    color: #C6C9D8;
+    height: 20rem;
+}
+.quicklinks-wrapper{
+    flex: 1;
+    background: rgba(0, 0, 0, 0.5);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 1rem 3rem;
+    display: flex;
+    flex-direction: column;
+    color: #C6C9D8;
+    height: 100%;
+}
+.quicklinks-wrapper p{
+    text-align: center;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+}
+.container h5{
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+}
+.contact-us{
+    flex: 1;
+    background: url('../../../assets/images/bg-pattern.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    color: #C6C9D8;
+    height: 25rem;
+    position: relative;
+}
+.support{
+    position: absolute;
+    right: 3rem;
+    top: 3rem;
+    
+}
+.contact-wrapper{
+    background: #ee076fa8;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+.contact-wrapper h4{
+width: 351px;
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: normal;
+font-size: 75px;
+line-height: 90px;
+color: #FFFFFF;
+}
+.contact-wrapper p{
+font-family: 'Poppins';
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+line-height: 26px;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: #FFFFFF;
+}
+.contact-wrapper a{
+    border: 2px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+}
+
+/* Small Phones portriate */
+@media screen and (max-width: 700px) {
+    footer{
+        flex-direction: column;
+    }
+
+}
