@@ -1,0 +1,94 @@
+ *{
+    font-size: 62.5%;
+}
+.beneficiaries{
+    width: 90%;
+    margin: 3rem auto;
+    box-sizing: border-box;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
+}
+.heading-section{
+    padding: 2rem;
+}
+.heading-section p{
+    font-size: 1.2rem;
+}
+.heading-section h2{
+font-family: "Poppins" sans-serif;
+font-style: normal;
+font-weight: 300;
+font-size: 3rem;
+color: #F81F01;
+}
+
+.items-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.card{
+    margin: 1rem;
+    max-width: 20rem;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
+    border-radius: 10px;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+.card:hover{
+    scale: 2;
+    background: #EE076E;
+    color: white;
+}
+
+.heading{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.heading .thumb{
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+.card-content{
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+.card-content .company{
+font-family: 'Poppins' sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 1rem;
+color: #EE076E;
+}
+.card-content h3{
+font-family: 'Poppins' sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 1.3rem;
+margin-top: 1rem;
+color: #F81F01;
+
+
+}
+.invest{
+    display: block;
+    text-decoration: none;
+    margin-top: 1.5rem;
+    color: #343a40;
+    border:1px solid #343a40;
+    padding: .5rem;
+    text-align: center;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    text-transform: uppercase;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.invest:hover{
+    background: #343a40;
+    color: white;
+}

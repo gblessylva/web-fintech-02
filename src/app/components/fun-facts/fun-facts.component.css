@@ -1,0 +1,43 @@
+.fun-facts *{
+    font-size: 62.5%;
+}
+
+.fun-facts{
+    width: 100%;
+    background: #F8F9FC;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.heading h2{
+
+font-family: 'Poppins' sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 2rem;
+color: #1F1F25;
+}
+.contents{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+.item h3{
+font-family: 'Poppins' sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 4rem;
+text-align: center;
+color: #F9004D;
+margin-top: 2rem;
+}
+.item p{
+font-family: 'Poppins' sans-serif;
+font-weight: normal;
+font-size: 18px;
+text-align: center;
+color: rgb(29, 29, 36);
+
+
+}

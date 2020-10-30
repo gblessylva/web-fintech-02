@@ -13,7 +13,18 @@ import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import { DefaultComponent } from './components/default/default.component';
+import { HowWorksSectionComponent } from './components/how-works-section/how-works-section.component';
+import { BeneficiariesComponent } from './components/beneficiaries/beneficiaries.component';
+import { FunFactsComponent } from './components/fun-facts/fun-facts.component';
+import { BlogSectionComponent } from './components/blog-section/blog-section.component';
+import { DashboardComponent } from './auth/dashboard/dashboard.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuardService } from './guards/auth-guard.service';
+import { ProjectsComponent } from './auth/dashboard/projects/projects.component';
+import { MilestonesComponent } from './auth/dashboard/milestones/milestones.component';
+import { ProfileComponent } from './auth/dashboard/profile/profile.component';
+import { SideBarComponent } from './auth/dashboard/side-bar/side-bar.component';
+import { InvestorsComponent } from './auth/dashboard/investors/investors.component';
 
 
 
@@ -29,14 +40,23 @@ import { DefaultComponent } from './components/default/default.component';
     LoginComponent,
     SignupComponent,
     NotfoundComponent,
-    DefaultComponent
+    HowWorksSectionComponent,
+    BeneficiariesComponent,
+    FunFactsComponent,
+    BlogSectionComponent,
+    DashboardComponent,
+    ProjectsComponent,
+    MilestonesComponent,
+    ProfileComponent,
+    SideBarComponent,
+    InvestorsComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

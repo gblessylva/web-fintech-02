@@ -8,13 +8,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-root',
-  template: `
-   <!-- <app-header [deviceXs]="deviceXs"></app-header> -->
-   <app-header></app-header>
-   <!-- <app-home></app-home> -->
-   <!-- <app-footer></app-footer> -->
-  <router-outlet></router-outlet>
-  `
+
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit, OnDestroy {
   mediaSub: Subscription;

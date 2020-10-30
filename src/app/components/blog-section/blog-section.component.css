@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap');
+
+section{
+    font-size: 62.5%;
+}
+.beneficiaries{
+    width: 90%;
+    margin: 3rem auto;
+    box-sizing: border-box;
+    padding-bottom: 3rem;
+}
+
+.card{
+    max-width: 20rem;
+    position: relative;
+    padding: 0;
+    margin-bottom: 3rem;
+    border-radius: 10px;    
+}
+.card-image{
+    width: 20rem;
+    margin: 0;
+    border-radius: 10px;
+}
+.card-image img {
+    object-fit: cover;
+    width: 100%;
+    border-radius: 10px;
+}
+.card-content{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.836);
+    z-index: 3;
+    width: 100%;
+    color: white;
+    bottom: 0;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.items-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.card-content{
+    padding: 1rem;
+    transition: transform .5s;
+    cursor: pointer;
+}
+.heading-section{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+    align-items: center;
+}
+.content h2{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2rem;
+    color: #F81F01;
+}
+.content p{
+    font-size: 1.1rem;
+    max-width: 50rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+.heading-section a{
+    text-decoration: none;
+    color: #1F1F25;
+    font-size: 1rem;
+
+}
+.card-content h4{
+    font-family: 'Poppins' sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
+
+    color: #C6C9D8;
+}
+
+.card-content h3{
+font-family: 'Poppins';
+font-size: 1rem;
+color: #FFFFFF;
+}
+
+.card-content p{
+    font-size: .9rem;
+    color: #C6C9D8;
+    display: none;
+    transition: 0.9s display;
+}
+.card-content:hover   p{
+    display: block;
+}
+.card:hover{
+    transform: scale(1.01);
+}
+/* Small Phones portriate */
+@media screen and (max-width: 700px) {
+    .items-container, .heading-section{
+        flex-direction: column;
+    }
+    .heading-section{
+        justify-content: center;
+    }
+    .heading-section a{
+        margin-bottom: 2rem;
+    }
+}

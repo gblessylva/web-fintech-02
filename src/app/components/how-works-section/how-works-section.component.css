@@ -1,0 +1,70 @@
+.how-works{
+    width: 100%;
+    padding: 6rem 4rem;
+    display: flex;
+    flex-direction: row;
+    margin-top: 3rem;
+    background: #e2e1e0;
+}
+.how-container{
+    flex: 1;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    padding: 2rem 3rem;
+    border-radius: 10px;
+    background: white;
+    margin-right: 4rem;
+}
+.how-icons-container{
+    flex: 2;
+    max-width: 50rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    padding: 2rem 3rem;
+    border-radius: 10px;
+    background: white;
+    display: flex;
+    flex-direction: row;
+}
+.how-items h2{
+    color: #EE076E;
+    font-size: 1.8rem;
+    font-weight: 400;
+    padding-bottom: 0.9rem;
+
+}
+
+.how-item{
+   padding: 0 1.5rem;
+   margin-bottom: 2rem;
+}
+.how-item img{
+    margin-bottom: 0.5rem;
+    height: 3rem;
+}
+.how-item h3{
+    font-size: 1.6rem;
+    color: #F81F01;
+    font-weight: 200;
+    padding-bottom: 0.5rem;
+}
+
+  
+.get-started-button{
+    padding: 10px 15px;
+    outline: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 3rem;
+    border: none;
+    display: block;
+    width: fit-content;
+    text-decoration: none;
+    background:#F81F01;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.24);
+}
+@media(max-width: 700px){
+    
+}
