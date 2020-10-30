@@ -12,7 +12,7 @@
         width: 100%;
         transition: all ease-in 1s;
     }
-    
+
     .navbar{
         display: flex;
         flex-direction: column;
@@ -20,7 +20,7 @@
         transition: all ease-in 1s;
     }
 
-   
+
     .navbar button{
         display: block;
         background: none;
@@ -33,8 +33,22 @@
         margin: 0;
         transition: all ease-in 0.5s;
     }
+    .site-small-title {
+      background: -webkit-linear-gradient(#EE076E, #F81F01);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: 'Montserrat', sans-serif;;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 0rem;
+      margin-bottom: 2rem;
+      margin-top: 3rem;
+      text-transform: uppercase;
+    }
+
     .desktop{
         display: none;
     }
-     
+
 }

@@ -15,6 +15,7 @@ import { ProjectsComponent } from './auth/dashboard/projects/projects.component'
 import { MilestonesComponent } from './auth/dashboard/milestones/milestones.component';
 import { InvestorsComponent } from './auth/dashboard/investors/investors.component';
 import { ProfileComponent } from './auth/dashboard/profile/profile.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 
 const route: Routes = [
@@ -24,16 +25,16 @@ const route: Routes = [
       { path: 'contact', component: ContactComponent},
       { path: 'login', component: LoginComponent},
       { path: 'register', component: SignupComponent},
-      { path: 'FAQ', component: SignupComponent},
+      { path: 'FAQ', component: FaqComponent},
       { path: '404', component: NotfoundComponent},
       {
-        path: 'sme-dashboard',  
+        path: 'sme-dashboard',
         canActivate: [AuthGuard],
         children: [
           {path: '', component: DashboardComponent},
           {
-            path: 'projects', 
-            component: ProjectsComponent, 
+            path: 'projects',
+            component: ProjectsComponent,
           },
           {
             path: 'milestones',
@@ -47,7 +48,6 @@ const route: Routes = [
             path: 'profile', component: ProfileComponent
           }
         ],
-      
     },
       {path: '**', redirectTo: '404'}
     ];
@@ -60,4 +60,4 @@ const route: Routes = [
    exports: [RouterModule],
    declarations: []
 })
-export class AppRoutingModule { } 
+export class AppRoutingModule { }
