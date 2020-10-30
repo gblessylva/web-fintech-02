@@ -27,6 +27,7 @@ import { SideBarComponent } from './auth/dashboard/side-bar/side-bar.component';
 import { InvestorsComponent } from './auth/dashboard/investors/investors.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { InvestorsComponent } from './auth/dashboard/investors/investors.compone
     ProfileComponent,
     SideBarComponent,
     InvestorsComponent,
+
   ],
   imports: [
     BrowserModule,
