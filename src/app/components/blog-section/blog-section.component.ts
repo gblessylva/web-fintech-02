@@ -11,5 +11,10 @@ export class BlogSectionComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  show=true;
+  
+  set=()=>{
+  console.log("Item Set")
+  }
+   
 }
