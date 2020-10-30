@@ -17,6 +17,14 @@ import { HowWorksSectionComponent } from './components/how-works-section/how-wor
 import { BeneficiariesComponent } from './components/beneficiaries/beneficiaries.component';
 import { FunFactsComponent } from './components/fun-facts/fun-facts.component';
 import { BlogSectionComponent } from './components/blog-section/blog-section.component';
+import { DashboardComponent } from './auth/dashboard/dashboard.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuardService } from './guards/auth-guard.service';
+import { ProjectsComponent } from './auth/dashboard/projects/projects.component';
+import { MilestonesComponent } from './auth/dashboard/milestones/milestones.component';
+import { ProfileComponent } from './auth/dashboard/profile/profile.component';
+import { SideBarComponent } from './auth/dashboard/side-bar/side-bar.component';
+import { InvestorsComponent } from './auth/dashboard/investors/investors.component';
 
 
 @NgModule({
@@ -34,13 +42,19 @@ import { BlogSectionComponent } from './components/blog-section/blog-section.com
     HowWorksSectionComponent,
     BeneficiariesComponent,
     FunFactsComponent,
-    BlogSectionComponent
+    BlogSectionComponent,
+    DashboardComponent,
+    ProjectsComponent,
+    MilestonesComponent,
+    ProfileComponent,
+    SideBarComponent,
+    InvestorsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

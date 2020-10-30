@@ -1,14 +1,47 @@
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-inverse navbar-fixed-top justify-content-between">
-    <h1>
+    <div class="nav-content">
+      <h1>
       <a class="navbar-brand"
       [routerLink]="['/']"
       routerLinkActive="active"
-      style="color:rgb(247, 76, 9)">{{title}}</a></h1>
-      <ul class="navbar-nav">
+      style="color:rgb(247, 76, 9)">{{title}}</a>
+      
+    </h1>
+    <button class="nav-toggle" (click)="show = !show">{{show ? '&#9776;' : '&times;'}}</button>
+    </div>
+    <ul class="navbar-nav mobile" *ngIf="show; else elseBlock">
+      <li class="nav-item">
+     <a class="nav-link"
+        [routerLink]="['/about']"
+        routerLinkActive="active">About</a>
+        </li>
+     <li class="nav-item">
+       <a class="nav-link"
+       [routerLink]="['/FAQ']"
+       routerLinkActive="active">FAQ</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link"
+       [routerLink]="['/contact']"
+       routerLinkActive="active">Contact</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link"
+       [routerLink]="['/login']"
+       routerLinkActive="active">Login</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link"
+       [routerLink]="['/register']"
+       routerLinkActive="active">Register</a>
+     </li>
+</ul>
+    
+      <ul class="navbar-nav desktop">
        <li class="nav-item">
       <a class="nav-link"
-         [routerLink]="['/About']"
+         [routerLink]="['/about']"
          routerLinkActive="active">About</a>
          </li>
       <li class="nav-item">
@@ -18,20 +51,21 @@
       </li>
       <li class="nav-item">
         <a class="nav-link"
-        [routerLink]="['/Contact']"
+        [routerLink]="['/contact']"
         routerLinkActive="active">Contact</a>
       </li>
       <li class="nav-item">
         <a class="nav-link"
-        [routerLink]="['/Login']"
+        [routerLink]="['/login']"
         routerLinkActive="active">Login</a>
       </li>
       <li class="nav-item">
         <a class="nav-link"
-        [routerLink]="['/SignUp']"
-        routerLinkActive="active">SignUp</a>
+        [routerLink]="['/register']"
+        routerLinkActive="active">Register</a>
       </li>
 </ul>
+
 </nav>
 </header>
 

@@ -5,7 +5,7 @@ import {HowWorksSectionComponent} from '../how-works-section/how-works-section.c
 import {BlogSectionComponent} from '../blog-section/blog-section.component';
 import {FunFactsComponent} from '../fun-facts/fun-facts.component';
 import {BeneficiariesComponent  } from "../beneficiaries/beneficiaries.component";
-
+import {HeaderComponent} from '../header/header.component'
 @NgModule({
   declarations:[
     HeroComponent, 
@@ -13,7 +13,8 @@ import {BeneficiariesComponent  } from "../beneficiaries/beneficiaries.component
     HowWorksSectionComponent,
     BlogSectionComponent,
     FunFactsComponent,
-    BeneficiariesComponent
+    BeneficiariesComponent,
+    HeaderComponent
   ]
 })
 
