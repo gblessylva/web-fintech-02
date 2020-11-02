@@ -127,5 +127,8 @@ color: #FFFFFF;
     footer{
         flex-direction: column;
     }
+    .quicklinks-wrapper{
+        width: 100%;
+    }
 
 }

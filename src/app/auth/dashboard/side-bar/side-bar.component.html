@@ -1,10 +1,35 @@
 <aside class="side-bar">
-  <ul>
-    <li><a [routerLink]="['projects']" routerLinkActive="router-link-active" >Projects</a></li>
-    <li><a [routerLink]="['milestones']" routerLinkActive="router-link-active" >Milestones</a></li>
-    <li><a [routerLink]="['investors']" routerLinkActive="router-link-active" >Investors</a></li>
-    <li><a [routerLink]="['profile']" routerLinkActive="router-link-active" >Profile</a></li>
+  <div class="user-info">
+    <div class="thmb-container">
+       <img src="../../../../assets/images/dp.png" alt="" class="thumb">
+    </div>
+   
+    <h4>Welcome User</h4>
+  </div>
+  <div class="dashboard-header">
+    <h3><a [routerLink]="['/sme-dashboard']" routerLinkActive="router-link-active" >Dashboard</a></h3>
+  </div>
+  <ul class="nav-links">
+    <div class="nav-container">
+      <li><h6 (click)="show =!show"> <i class="fas fa-folder"></i>Projects</h6></li>
+     <div class="nav-items"  *ngIf="show;">
+        <li><a [routerLink]="['/projects']" routerLinkActive="router-link-active" > <i class="fas fa-folder-open"></i> All Projects</a></li>
+        <li> <a [routerLink]="['/add-projects']" routerLinkActive="router-link-active" > <i class="fas fa-plus"></i> New Projects</a></li>
+     </div>
+      </div>
 
+    <div class="nav-container">
+      <li><h6 (click)="mile =!mile"> <i class="fas fa-calendar"></i> Milestones</h6></li>  
+     <div class="nav-items"  *ngIf="mile;">
+        <li><a [routerLink]="['/milestones']" routerLinkActive="router-link-active" >  <i class="fas fa-calendar-check"></i>All Milestones</a></li>
+        <li> <a [routerLink]="['/add-milestone']" routerLinkActive="router-link-active" >  <i class="fas fa-calendar-plus"></i> New Milestone</a></li>
+     </div>
+     </div>
+    <li><a [routerLink]="['/investors']" routerLinkActive="router-link-active" >Investors</a></li>
+    <li><a [routerLink]="['/profile']" routerLinkActive="router-link-active" >Profile</a></li>
   </ul>
+    <div class="nav-links">
+      <li><a href="/login">Sign Out</a></li>
+    </div>
 </aside>
 

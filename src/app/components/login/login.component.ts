@@ -1,8 +1,5 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth/auth.service';
-
 
 @Component({
   selector: 'app-login',
@@ -11,26 +8,14 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class LoginComponent  {
 
-  errorMessage: string;
-  pageTitle = 'Log In';
+  constructor(private router: Router) { }
 
-  constructor(private authService: AuthService,
-              private router: Router) { }
-
-  login(loginForm: NgForm): void {
-    if (loginForm && loginForm.valid) {
-      const userName = loginForm.form.value.userName;
-      const password = loginForm.form.value.password;
-      this.authService.login(userName, password);
-
-      // Navigate to the Product List page after log in.
-      if (this.authService.redirectUrl) {
-        this.router.navigateByUrl(this.authService.redirectUrl);
-      } else {
-        this.router.navigate(['/about']);
-      }
-    } else {
-      this.errorMessage = 'Please enter a user name and password.';
-    }
+  ngOnInit() {
+  }
+  goToDashboard= (e)=>{
+    e.preventDefault()
+    localStorage.setItem('authToken', "helloadmin")
+    window.location.href='/sme-dashboard'
+    
   }
 }

@@ -28,27 +28,17 @@ const route: Routes = [
       { path: 'FAQ', component: FaqComponent},
       { path: '404', component: NotfoundComponent},
       {
-        path: 'sme-dashboard',
-        canActivate: [AuthGuard],
-        children: [
-          {path: '', component: DashboardComponent},
-          {
-            path: 'projects',
-            component: ProjectsComponent,
-          },
-          {
-            path: 'milestones',
-            component: MilestonesComponent, // another child route component that the router renders
-          },
-          {
-            path: 'investors',
-            component: InvestorsComponent
-          },
-          {
-            path: 'profile', component: ProfileComponent
-          }
-        ],
+        path: 'projects', 
+        component: ProjectsComponent, 
+      },
+      {
+        path: 'sme-dashboard',  
+        canActivate: [AuthGuard],   
+        component: DashboardComponent   
     },
+        {path: 'milestones', component: MilestonesComponent, canActivate: [AuthGuard] },
+    {path: 'investors', component: InvestorsComponent, canActivate: [AuthGuard] },
+    {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
       {path: '**', redirectTo: '404'}
     ];
 @NgModule({

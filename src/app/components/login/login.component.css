@@ -1,0 +1,251 @@
+
+/* LOGIN PAGE BY YAHAIII */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+   
+  /* background: url("assets/images/background.png") no-repeat center center fixed; */
+  height: 100%;
+  min-height: 380px;
+  /* background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;  */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* LOGIN FORM */
+
+/* Background image */
+.login-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 40px;
+  margin: 0;
+  
+}
+
+/* Header & slogan */
+section{
+    background: #424242;
+}
+.investa {
+  width: 40%;
+  margin: 50px;
+  font-family: "Poppins";
+}
+
+.investa h1 {
+    font-size: 5.5em;
+    background: -webkit-linear-gradient(#EE076E, #F81F01);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.slogan {
+  color: #f1f1f1;
+  font-size: 2.5em;
+}
+
+
+/* form */
+.login-form {
+  width: 40%;
+  background-color: white;
+  border-radius: 10px;
+  font-family: 'Poppins';
+  display:flex;
+  flex-direction: column;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.login-form h2 {
+  text-align: center;
+  color: #ff416c;
+  padding-top: 20px;
+}
+form{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+}
+input[type=text], input[type=password], input[type=email]{
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 0 auto;
+  border: none;
+  background: #fff;
+  outline: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.16), 0 2px 3px rgba(0,0,0,0.23);
+
+}
+.form-item{
+    margin-bottom: 20px;
+}
+.form-item span{
+    color: red;
+}
+.form-item label{
+    padding-bottom: 10px;
+}
+input[type=checkbox] {
+  margin: .4rem;
+}
+
+.reg-btn {
+  margin-top: 15px;
+}
+
+
+
+/* Set a style for the submit button */
+.btn {
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.btn:hover {
+  opacity: 1;
+}
+
+.under-text {
+  font-size: .8em;
+  color: #424242;
+  margin: 0 auto;
+  text-align: center;
+  padding: 5px;
+  margin-top: 40px;
+  font-weight: lighter;
+}
+
+
+/* MEDIA QUERIES */
+
+/* Workstations wider 1200px other very large screens */
+@media screen and (min-width: 1800px) {
+  
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media screen and (max-width: 1199.98px) {
+  .investa {
+    width: 35%;
+  }
+  
+  .investa h1 {
+    font-size: 4.3em;
+  }
+
+  .slogan {
+    font-size: 1.8em;
+  }
+
+  .login-form {
+    width: 40%;
+  }
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media screen and (max-width: 991.98px) {
+  .investa h1 {
+    font-size: 3.2em;
+  }
+}
+
+/* Small devices (landscape phones, less than 790px) */
+@media screen and (max-width: 800px) {
+  .investa {
+    width: 90%;
+    margin-bottom: 0;
+  }
+  /* 787.98 */
+  .login-form {
+    width: 100%;
+  }
+}
+
+/* Phones portrait */
+@media screen and (max-width: 575.98px) {
+  .login-container {
+    margin-top: 110px;
+  }
+
+  .investa {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+  .investa h1 {
+    font-size: 2.8em;
+    text-align: center;
+  }
+
+  .slogan {
+    font-size: 1.3em;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .login-form {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 1em;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .under-text {
+    margin-top: 10px;
+  }
+}
+
+/* All devices smaller than 420 */
+@media screen and (max-width: 420px) {
+  .login-container {
+      flex-direction: column;
+  }
+
+  .investa {
+    width: 70%;
+    margin-bottom: 30px;
+  }
+
+  .investa h1 {
+    font-size: 2.3em;
+    text-align: center;
+  }
+
+  .slogan {
+    font-size: 1em;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .login-form {
+    width: 100%;
+    margin-top: 20px;
+    font-family: .7em;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .under-text {
+    margin-top: 10px;
+  }
+}
