@@ -1,4 +1,43 @@
 <app-header></app-header>
-<p>
-  login works!
-</p>
+<section>
+  <div class="login-container">
+    <div class="investa">
+        <h1>INVESTA</h1>
+        <p class="slogan">Connecting SMEs to investors</p>
+    </div>
+    <div class="login-form">
+        <h2>Login</h2>
+        <form >
+            
+          <div class="form-item">
+            <label for="email">Email <span>*</span></label>
+            <input type="email" 
+            name="email" 
+            required
+            id="email" 
+            placeholder="email">
+          </div>
+          <div class="form-item"> 
+            <label for="password">Password <span>*</span></label>
+            <input type="password" 
+            name="password" 
+            id="password"
+            required 
+            placeholder="********">
+          </div>
+          <div class="form-item">
+             <button 
+             (click)="goToDashboard($event)"
+             class="btn reg-btn">LOGIN</button>
+          </div>
+            <div class="under-text">
+                <p>New user? <a href="/register">Register here</a>.</p>
+            </div>
+        </form>
+    </div>
+</div>
+<app-footer>
+  
+</app-footer>
+
+</section>

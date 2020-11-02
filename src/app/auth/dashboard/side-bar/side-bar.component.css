@@ -9,7 +9,8 @@ a{
     padding: 0;
     margin: 0;
     display: block;
-    transition: 0.3s;
+    font-family: "Montserrat" serif;
+    transition: 1s;
 }
 ul{
     margin: 0;
@@ -17,31 +18,102 @@ ul{
 }
 .side-bar{
     height: 100%; 
-    width: 100px;
+    width: 20%;
     position: fixed; 
     z-index: 1;
     padding: 0;
     top: 0; 
     left: 0;
     background-color: #353D4A; 
-    overflow-x: hidden; 
-    padding-top: 60px; 
+    overflow-x: hidden;
     transition: 0.5s; 
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-.example-container {
-    width: 500px;
-    height: 300px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-  }
-  
-  .example-sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .example-sidenav {
-    padding: 20px;
-  }
+.side-bar::-webkit-scrollbar{
+  display: none;
+}
+.thmb-container{
+  width: 100%;
+  margin-right: 0 auto;
+  display: flex;
+  justify-content: center;
+
+}
+.user-info{
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+width: 200px;
+}
+.thmb-container img{
+  width: 80px;
+  border-radius: 50%;
+}
+
+.user-info h4{
+font-family: "Roboto";
+font-style: normal;
+font-weight: normal;
+color: #98A6AD;
+text-align: center;
+font-size: 16px;
+margin-top: 20px;
+
+}
+
+
+.nav-links li{
+  padding: 15px;
+  border-top: 1px solid #313844;
+  border-bottom: 1px solid #313131;
+  transition: 0.3s ease-in; 
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  transition: 3s ease-in;
+}
+.nav-links li:hover{
+  background: #313844;
+}
+.nav-links li a:hover{
+  text-decoration: none;
+  color: #6C757D;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  letter-spacing: 3px;
+ 
+}
+.dashboard-header{
+  font-family: 'poppins';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 22px;
+  color: #6C757D;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+
+
+}
+.dashboard-header a{
+  color: #6C757D; 
+  font-size: 14px;
+}
+.dashboard-header a:hover{
+  text-decoration: none;
+  color: #6C757D;
+  cursor: default;
+}
+.nav-container h6{
+  color: #98A6AD;
+  cursor: pointer;
+}
+.nav-items li{
+  padding-left: 30px;
+}

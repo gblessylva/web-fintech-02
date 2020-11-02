@@ -3,7 +3,75 @@
 
   </app-side-bar>
   <div class="content">
-      <h5>you are logged in</h5>
+      <div class="overview-top-widgets">
+
+        <div class="widget-container">
+          <p>Total investors</p>
+          <h6>23</h6>
+        </div>
+        <div class="widget-container">
+          <p>Amount Requested</p>
+          <h6>$23098</h6>
+        </div>
+        <div class="widget-container">
+          <p>Amount Raised</p>
+          <h6>$20098</h6>
+        </div>
+        <div class="widget-container">
+          <p>EquityPaid</p>
+          <h6>60%</h6>
+        </div>
+      </div>
+
+      <div class="projects-widgets">
+        <div class="project-widget-container">
+          <div class="header">
+            <p>Projects Overview</p> <a href="/projects"> View all</a>
+          </div>          
+          <div class="project-grid">
+            <div class="info">
+               <h6 class="total">Total: <span>2</span></h6>
+              <h6 class="completed">Completed: <span>1</span></h6>
+              <!-- <h6 class="pending">Pending: <span>0</span></h6>
+              <h6 class="suspended">Suspended: <span>0</span></h6> -->
+              <h6 class="inprogress">In progress: <span>1</span></h6>
+            </div>
+             
+              <div class="completion-rate">
+                <p>Completion Rate: <span>70%</span></p>
+                <div class="completion-outer">
+                  <div class="completion-inner">
+
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        
+        <div class="project-widget-container">
+          <div class="header">
+            <p>Milestones Overview</p> <a href="/milestones"> View all</a>
+          </div>
+          
+          <div class="project-grid">
+            <div class="info">
+               <h6 class="total">Total: <span>23</span></h6>
+              <h6 class="completed">Completed: <span>19</span></h6>
+              <h6 class="inprogress">In progress: <span>4</span></h6>
+            </div>
+             
+              <div class="completion-rate">
+                <p>Success Rate: <span>90%</span></p>
+                <div class="completion-outer">
+                  <div class="milestones-completion-inner">
+
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>        
+      </div>
+     
   </div>
 </section>
 <router-outlet></router-outlet>
