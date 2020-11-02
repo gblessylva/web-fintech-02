@@ -25,6 +25,10 @@ import { MilestonesComponent } from './auth/dashboard/milestones/milestones.comp
 import { ProfileComponent } from './auth/dashboard/profile/profile.component';
 import { SideBarComponent } from './auth/dashboard/side-bar/side-bar.component';
 import { InvestorsComponent } from './auth/dashboard/investors/investors.component';
+import { MessageComponent } from './components/message/message.component';
+import { FormsModule } from '@angular/forms';
+import { MessageService } from './components/message/message.service';
+import { FaqComponent } from './components/faq/faq.component';
 
 
 @NgModule({
@@ -49,12 +53,15 @@ import { InvestorsComponent } from './auth/dashboard/investors/investors.compone
     ProfileComponent,
     SideBarComponent,
     InvestorsComponent,
+    MessageComponent,
+    FaqComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [AuthService, AuthGuardService],
+  providers: [AuthService, AuthGuardService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
