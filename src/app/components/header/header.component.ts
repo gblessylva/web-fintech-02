@@ -13,5 +13,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  show() {
+    console.log('Display show');
+  }
 }
