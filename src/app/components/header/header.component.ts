@@ -21,7 +21,7 @@ import {
           [
             style({ height: 0, opacity: 0 }),
             animate('1s ease-out', 
-                    style({ height: 200, opacity: 1 }))
+                    style({ height: 200, opacity: 0 }))
           ]
         ),
         transition(

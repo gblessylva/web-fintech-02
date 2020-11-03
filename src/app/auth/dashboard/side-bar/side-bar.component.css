@@ -57,6 +57,9 @@ width: 200px;
   border-radius: 50%;
 }
 
+.fas{
+  margin-right: 10px;
+}
 .user-info h4{
 font-family: "Roboto";
 font-style: normal;
