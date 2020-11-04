@@ -29,7 +29,8 @@ import { MessageComponent } from './components/message/message.component';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from './components/message/message.service';
 import { FaqComponent } from './components/faq/faq.component';
-
+import { NewProjectComponent } from './auth/dashboard/new-project/new-project.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -54,13 +55,16 @@ import { FaqComponent } from './components/faq/faq.component';
     SideBarComponent,
     InvestorsComponent,
     MessageComponent,
-    FaqComponent,
+    FaqComponent, 
+    NewProjectComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CKEditorModule,
+
   ],
   providers: [AuthService, AuthGuardService, MessageService],
   bootstrap: [AppComponent]
