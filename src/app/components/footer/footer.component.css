@@ -124,10 +124,14 @@ color: #FFFFFF;
 
 /* Small Phones portriate */
 @media screen and (max-width: 700px) {
-    footer{
+    footer, .container{
         flex-direction: column;
     }
-    .quicklinks-wrapper{
+    .quicklinks-wrapper, .contact-us{
+        width: 100%;
+    }
+    .quicklinks{
+        height: fit-content;
         width: 100%;
     }
 
