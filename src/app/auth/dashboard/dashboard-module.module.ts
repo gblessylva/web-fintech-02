@@ -10,6 +10,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { DashboardComponent } from './dashboard.component';
 import { MilestonesComponent } from './milestones/milestones.component';
 import { NewProjectComponent } from './new-project/new-project.component';
+import { AddNewMilestoneComponent } from './add-new-milestone/add-new-milestone.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { NewProjectComponent } from './new-project/new-project.component';
     ProjectsComponent,
     DashboardComponent,
     MilestonesComponent,
-    NewProjectComponent
+    NewProjectComponent,
+    AddNewMilestoneComponent
   ]
 })
 export class DashboardModuleModule { }

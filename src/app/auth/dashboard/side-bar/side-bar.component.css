@@ -18,7 +18,7 @@ ul{
 }
 .side-bar{
     height: 100%; 
-    width: 20%;
+    width: 250px;
     position: fixed; 
     z-index: 1;
     padding: 0;
@@ -119,4 +119,25 @@ margin-top: 20px;
 }
 .nav-items li{
   padding-left: 30px;
+}
+.bar{
+  width: 100%;
+  position: relative;
+  height: 40px;
+z-index: 3;
+display: none;
+height: 0;
+}
+.fa-bars{
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  right: 20px;
+  top: 20px;
+}
+
+@media screen and (max-width: 900px) {
+  .bar{
+    display: block;
+  }
 }

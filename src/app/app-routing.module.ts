@@ -17,6 +17,7 @@ import { InvestorsComponent } from './auth/dashboard/investors/investors.compone
 import { ProfileComponent } from './auth/dashboard/profile/profile.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { NewProjectComponent } from './auth/dashboard/new-project/new-project.component';
+import { AddNewMilestoneComponent } from './auth/dashboard/add-new-milestone/add-new-milestone.component';
 
 
 const route: Routes = [
@@ -39,6 +40,7 @@ const route: Routes = [
     },
     {path: 'milestones', component: MilestonesComponent, canActivate: [AuthGuard] },
     {path:'add-project', component: NewProjectComponent, canActivate: [AuthGuard]},
+    {path:'add-milestone', component: AddNewMilestoneComponent, canActivate: [AuthGuard]},
     {path: 'investors', component: InvestorsComponent, canActivate: [AuthGuard] },
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
       {path: '**', redirectTo: '404'}

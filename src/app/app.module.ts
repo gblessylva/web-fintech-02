@@ -31,6 +31,7 @@ import { MessageService } from './components/message/message.service';
 import { FaqComponent } from './components/faq/faq.component';
 import { NewProjectComponent } from './auth/dashboard/new-project/new-project.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { AddNewMilestoneComponent } from './auth/dashboard/add-new-milestone/add-new-milestone.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     InvestorsComponent,
     MessageComponent,
     FaqComponent, 
-    NewProjectComponent
+    NewProjectComponent,
+    AddNewMilestoneComponent
   ],
   imports: [
     BrowserModule,
