@@ -1,0 +1,103 @@
+section{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.projects-container{
+    color: #fff;
+    width: 80%;
+    text-align: center;
+    padding-top: 20px;
+    background: #313844;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.projects-container h4{
+    font-size: 25px;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    font-weight:200;
+}
+
+.editor-1{
+    color: #313844;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    gap: 40px;
+    border-radius: 8px;
+    background-color: #3A4250;
+}
+.main-content{
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25), 0 3px 6px rgba(0,0,0,0.22);
+    padding: 20px;
+    border-radius: 8px;
+}
+.toolbar{
+    flex: 1;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25), 0 3px 6px rgba(0,0,0,0.22);
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.form-item{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.form-item input[type="text"], 
+select, textarea {
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+    background: whitesmoke;
+    color: #313844;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+.form-item label{
+    font-size: 16px;
+    font-weight: 200;
+    font-family: 'poppins';
+    color: #c9c9c9;
+    margin-bottom: 10px;
+}
+.form-item button{
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: #e2e2e2;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25), 0 3px 6px rgba(0,0,0,0.22);
+    cursor: pointer;
+    background: #35B8E0;
+}
+
+@media screen and (max-width: 700px) {
+.wrapper{
+    flex-direction: column;
+}
+}
+@media screen and (max-width: 900px) {
+    .wrapper{
+        flex-direction: column;
+    }
+    }
