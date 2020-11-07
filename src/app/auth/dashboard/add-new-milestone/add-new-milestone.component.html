@@ -1,38 +1,55 @@
+<div *ngIf="showModal"> 
+  <div class="my-modal" (click)="hideModal()" >
+  <div class="top"> <button (click)="hideModal()">&times;</button></div>
+  <h3>Milestone Added Successfully</h3>
+</div>
+</div>
+
 <section>
   <app-side-bar>
 </app-side-bar> 
 <div class="projects-container">
+     
     <h4> Create new Project Milestone</h4>
-     <form action="" class="wrapper">
+     <form [formGroup] = "formData" 
+          (ngSubmit)="testForm(formData)" 
+          class="wrapper">
+          
        <div class="main-content">
          <div class="form-item">
            <label for="project-title"> What the title of your Milestone</label>
-            <input type="text" name="project-title" id="">
+            <input type="text" formControlName="title" id="">
          </div>
          <div class="form-item">
-           <label for="project-details">Briefly Describe your Milestone. </label>
-           <textarea name="project-details" id="project-details" cols="30" rows="10"></textarea>
+           <label for="description">Briefly Describe your Milestone. </label>
+           <textarea formControlName="description" id="description" cols="30" rows="10"></textarea>
          </div>
        
        </div>
        <div class="toolbar">
         <div class="form-item"> 
           <label for="project Duration">Select Project</label>
-         <select name="project-duration" id="project-duration">
-         <option value="one-month"> Get an Office Space</option>
+         <select name="project-duration" 
+            formControlName="projectID" 
+            id="project-duration" *ngFor="let project of projects">
+         <option value="{{project.companyID}}">{{project.projectName}}</option>
        </select>
         </div>
         <div class="form-item">
-          <label for="project-duration">When is this Milestone Due?</label>
-            <input type="date" name="project-duration" id="project-duration">
+          <label for="project-duration">When is project Start date Milestone Due?</label>
+            <input type="date"  formControlName="startdate" id="startdate">
+        </div>
+        <div class="form-item">
+          <label for="project-duration">When is project End date?</label>
+            <input type="date"  formControlName="endDate" id="startdate">
         </div>
         <div class="form-item">
                 
           <label for="amount"> How much in USD would you need to complete this Milestone?</label>
-          <input type="text" name="amount" id="amount">
+          <input type="text" formControlName="amount" id="amount">
         </div>
         <div class="form-item">
-          <button>Ad Milestone</button>
+          <button type="submit">Add Milestone</button>
         </div>
     
        </div>

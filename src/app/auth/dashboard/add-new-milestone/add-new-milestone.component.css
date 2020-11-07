@@ -101,3 +101,18 @@ select, textarea {
         flex-direction: column;
     }
     }
+
+
+    .my-modal{
+        width: 100%;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        color: wheat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+
+    }

@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule  } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -26,12 +28,12 @@ import { ProfileComponent } from './auth/dashboard/profile/profile.component';
 import { SideBarComponent } from './auth/dashboard/side-bar/side-bar.component';
 import { InvestorsComponent } from './auth/dashboard/investors/investors.component';
 import { MessageComponent } from './components/message/message.component';
-import { FormsModule } from '@angular/forms';
 import { MessageService } from './components/message/message.service';
 import { FaqComponent } from './components/faq/faq.component';
 import { NewProjectComponent } from './auth/dashboard/new-project/new-project.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AddNewMilestoneComponent } from './auth/dashboard/add-new-milestone/add-new-milestone.component';
+
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { AddNewMilestoneComponent } from './auth/dashboard/add-new-milestone/add
     FormsModule, 
     BrowserAnimationsModule,
     CKEditorModule,
+    HttpClientModule,
+    ReactiveFormsModule
 
   ],
   providers: [AuthService, AuthGuardService, MessageService],

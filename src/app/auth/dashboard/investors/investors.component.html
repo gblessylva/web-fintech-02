@@ -1,3 +1,15 @@
-<app-side-bar>
-
-</app-side-bar>
+<section>
+    <app-side-bar>
+  </app-side-bar> 
+  <div class='over-view'>
+     <p *ngIf="users.length===0">Loading....</p>   
+     
+     <div class="content" *ngFor="let user of users">
+         <h2>Role: {{user.role}}</h2>
+         <h2>User Name: {{user.username}}</h2>
+         <h2>email: {{user.email}}</h2>
+         <h3>Full name: {{user.profile.lastName}}  {{user.profile.firstName}}</h3>
+     </div>
+  </div> 
+  </section>
+  
