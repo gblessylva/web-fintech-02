@@ -2,10 +2,11 @@ section{
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    background: #313844;
 }
 .projects-container{
     color: #fff;
-    width: 80%;
+    width: 85%;
     text-align: center;
     padding-top: 20px;
     background: #313844;
@@ -46,7 +47,6 @@ td{
     width: 100%;
     margin-top: 20px;
     position: relative;
-    height: 50px;background: red;
 }
 .header .container{
     position: absolute;
@@ -70,4 +70,32 @@ td{
 }
 .inprogress{
     color: #35B8E0;
+}
+
+
+
+.new-milestone{
+    position: absolute;
+    right: 30px;
+    color: #3A4250;
+    font-size: 30px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    
+}
+.new-milestone:hover::before{
+    content: 'Add new Project';
+    font-size: 13px;
+    position: absolute;
+    right: 70px;
+    background: #35B8E0;
+    padding: 10px;
+    width: 200px;
 }

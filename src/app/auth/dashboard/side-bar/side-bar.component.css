@@ -124,9 +124,9 @@ margin-top: 20px;
   width: 100%;
   position: relative;
   height: 40px;
-z-index: 3;
-display: none;
-height: 0;
+  z-index: 3;
+  display: none;
+  height: 0;
 }
 .fa-bars{
   color: white;
@@ -139,5 +139,9 @@ height: 0;
 @media screen and (max-width: 900px) {
   .bar{
     display: block;
+    margin-top: 30px;
+    margin-left: 30px;
   }
+  
+  
 }
