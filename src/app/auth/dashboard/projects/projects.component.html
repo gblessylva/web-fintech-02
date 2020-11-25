@@ -2,56 +2,33 @@
   <app-side-bar>
 </app-side-bar> 
 <div class="projects-container">
+  <div class="header">
+    <a href="/add-project" class="new-milestone"> <i class="fas fa-plus"></i> </a> 
+  </div>
+
+  <p *ngIf="projects.length===0">Loading....</p>
     <h4>Projects</h4>   
+    
     <table class="project-table">
         <tr>
            <td>#</td>
           <td>Project Name</td>
-          <td>Date Created</td>
+          <td>Duration</td>
+          <td>Amount Needed ($)</td>
           <td># of Milestones</td>
           <td>Status</td>
           <td>Completion Level</td>
         </tr>
-        <tr>
-            <td>1</td>
-           <td>Get New Shop</td>
-           <td>26/10/2020</td>
-           <td>13</td>
-           <td class="inprogress">In Progress</td>
-           <td class="inprogress">80%</td>
+        <tr *ngFor="let i = index let project of projects">
+            <td>{{i+1}}</td>
+           <td>{{project.projectName}}</td>
+           <td>{{project.projectDuration}}</td>
+           <td>{{project.amountNeeded}}</td>
+           <td>{{project.milestones.length}}</td>
+           <td class="{{project.status}}">{{project.status | titlecase}}</td>
+           <td class="{{project.status}}">80%</td>
          </tr>
-         <tr>
-            <td>2</td>
-           <td>Get New Shop</td>
-           <td>26/10/2020</td>
-           <td>13</td>
-           <td class="pending">Pending</td>
-           <td class="pending">10%</td>
-         </tr>
-         <tr>
-            <td>3</td>
-           <td>Get New Shop</td>
-           <td>26/10/2020</td>
-           <td>13</td>
-           <td class="completed">Completed</td>
-           <td class="completed">100%</td>
-         </tr>
-         <tr>
-            <td>4</td>
-           <td>Get New Shop</td>
-           <td>26/10/2020</td>
-           <td>13</td>
-           <td class="completed">Completed</td>
-           <td class="completed">100%</td>
-         </tr>
-         <tr>
-            <td>5</td>
-           <td>Get New Shop</td>
-           <td>26/10/2020</td>
-           <td>13</td>
-           <td class="inprogress">In Progress</td>
-           <td class="inprogress">80%</td>
-         </tr>
+         
       </table>
 </div> 
 </section>

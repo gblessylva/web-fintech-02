@@ -36,7 +36,6 @@ export class AddNewMilestoneComponent implements OnInit {
       endDate,
       projectID
      }
-
      
       this.dataService.postMilestones(milestones).subscribe(data=>{
         console.log('added new milestone', data)
@@ -44,14 +43,12 @@ export class AddNewMilestoneComponent implements OnInit {
         this.showModal = true;
         
   }
-
   hideModal(){
     this.showModal = false;
     this.formData.reset();
 
   }
 
-  
 
   ngOnInit() {
       this.dataService.getProject().subscribe((project: any [])=>{
@@ -66,7 +63,7 @@ export class AddNewMilestoneComponent implements OnInit {
       startdate: new FormControl(''),
       endDate: new FormControl(),
       projectID: new FormControl()
-   });
+   }); 
   }
 
 

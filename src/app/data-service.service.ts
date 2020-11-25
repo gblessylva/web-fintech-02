@@ -39,5 +39,17 @@ export class DataServiceService {
    getProject(){
      return this.http.get('http://localhost:2020/api/v1/projects')
    }
-  
+
+   postProject(project: any){
+     const projectURL = 'http://localhost:2020/api/v1/projects';
+     const body = JSON.stringify(project)
+     const header = new HttpHeaders()
+     header.set('Content-Type', 'application/json; charset=utf-8')
+     return this.http.post(projectURL, project )
+   }
+
+   getMilestones(){
+    return this.http.get('http://localhost:2020/api/v1/milestones')
+   }
+ 
 }

@@ -2,54 +2,45 @@
     <app-side-bar>
   </app-side-bar> 
   <div class="projects-container">
-      <h4>Projects  Milestones</h4>   
+    <div class="header">
+      <a href="/add-milestone" class="new-milestone"> <i class="fas fa-plus"></i> </a>
+      <h4>Projects  Milestones</h4>  
+    </div>
+    <p>{{lento}}% Completed</p>
+    <div class="completed-percent">
+    <div class="inner-level" [ngStyle]="{'width': lento + '%'}"></div>
+    </div>
       <table class="project-table">
           <tr>
              <td>#</td>
             <td>Name</td>
             <td>Description</td>
-            <td>Date Created</td>
+            <td>Amount</td>
+            <td>Duration</td>
             <td>Project</td>
             <td>Status</td>
-            <td>Completion Level</td>
+            <!-- <td>Completion Level</td> -->
           </tr>
-          <tr>
-            <td>1</td>
-             <td>Paint Shop</td>
-             <td>Paint the office space for easy access and usage Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, voluptatem, animi porro voluptates iure ad placeat cumque ullam repudiandae voluptas totam modi aspernatur assumenda est molestias. Architecto laudantium earum at velit iure totam quia inventore? Odit molestiae natus perferendis odio!</td>
-             <td>16/10/2020</td>
-             <td>Get a Shop</td>
-             <td class="completed">Completed</td>
-             <td class="completed">100%</td>
+          <tr *ngFor="let i = index let milestone of milestones">
+            <td>{{i+1}}</td>
+             <td>{{milestone.name}}</td>
+             <td>{{milestone.description}}</td>
+              <td>{{milestone.amount}}</td>
+             <td>{{milestone.duration}}</td>
+             <td>{{milestone.projectID}}</td>
+             <td class="{{milestone.status}}">{{milestone.status | titlecase}}</td>
+             <!-- <td class="{{milestone.status}}"><button>Start</button></td> -->
            </tr>
-           <tr>
-            <td>2</td>
-             <td>Buy Chairs</td>
-             <td>Paint the office space for easy access and usage Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, voluptatem, animi porro voluptates iure ad placeat cumque </td>
-             <td>16/10/2020</td>
-             <td>Get a Shop</td>
-             <td class="inprogress">In Progress</td>
-             <td class="inprogress">80%</td>
+           
+           <tr >
+             <td>Total</td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td>Total amount</td>
+             <td>{{total}}</td>
            </tr>
-           <tr>
-            <td>3</td>
-             <td>Pay Workers</td>
-             <td>Paint the office space for easy access and usage Lorem ipsum, dolor io!</td>
-             <td>16/10/2020</td>
-             <td>Get a Shop</td>
-             <td class="pending">Pending</td>
-             <td class="pending">30%</td>
-           </tr>
-           <tr>
-            <td>4</td>
-             <td>Buy Food</td>
-             <td>Paint the office space for easy access and usage Lorem ipsum, dolor io!</td>
-             <td>16/10/2020</td>
-             <td>Get a Shop</td>
-             <td class="cancelled">Cancelled</td>
-             <td class="cancelled">0%</td>
-           </tr>
-        
         </table>
   </div> 
   </section>

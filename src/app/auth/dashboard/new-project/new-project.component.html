@@ -3,22 +3,22 @@
 </app-side-bar> 
 <div class="projects-container">
     <h4> Create new Project</h4>
-     <form action="" class="wrapper">
+     <form action="" class="wrapper" [formGroup]="projectFormData" (ngSubmit)="postProject(projectFormData)" >
        <div class="main-content">
          <div class="form-item">
            <label for="project-title"> Project Title</label>
-            <input type="text" name="project-title" id="">
+            <input formControlName="projectName" type="text" name="project-title" id="">
          </div>
          <div class="form-item">
            <label for="project-details">Briefly Describe your Project. </label>
-           <textarea name="project-details" id="project-details" cols="30" rows="10"></textarea>
+           <textarea formControlName="projectDescription" name="project-details" id="project-details" cols="30" rows="10"></textarea>
          </div>
        
        </div>
        <div class="toolbar">
         <div class="form-item"> 
           <label for="project Duration">How long is the estimated duration of your project?</label>
-         <select name="project-duration" id="project-duration">
+         <select formControlName="projectDuration" name="project-duration" id="project-duration">
          <option value="one-month"> One Month</option>
          <option value="three-months">Three Months</option>
          <option value="six-months"> Six Months</option>
@@ -28,7 +28,7 @@
         <div class="form-item">
                 <!-- <input type="date" name="project-duration" id="project-duration"> -->
           <label for="amount"> How much in USD would you need?</label>
-          <input type="text" name="amount" id="amount">
+          <input formControlName="amountNeeded" type="text" name="amount" id="amount">
         </div>
         <div class="form-item">
           <button>Create Project</button>

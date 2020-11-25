@@ -11,7 +11,7 @@
         </div>
         <div class="widget-container">
           <p>Amount Requested</p>
-          <h6>$23098</h6>
+          <h6>${{amountRequested}}</h6>
         </div>
         <div class="widget-container">
           <p>Amount Raised</p>
@@ -55,15 +55,15 @@
           
           <div class="project-grid">
             <div class="info">
-               <h6 class="total">Total: <span>23</span></h6>
-              <h6 class="completed">Completed: <span>19</span></h6>
-              <h6 class="inprogress">In progress: <span>4</span></h6>
+               <h6 class="total">Total: <span>{{milestones.length}}</span></h6>
+              <h6 class="completed">Completed: <span>{{completedMilestones}}</span></h6>
+              <h6 class="inprogress">In progress: <span>{{pendingMilestones}}</span></h6>
             </div>
              
               <div class="completion-rate">
-                <p>Success Rate: <span>90%</span></p>
+                <p>Success Rate: <span>{{successRate}}%</span></p>
                 <div class="completion-outer">
-                  <div class="milestones-completion-inner">
+                  <div class="milestones-completion-inner" [ngStyle]="{'width': successRate + '%'}">
 
                   </div>
                 </div>
