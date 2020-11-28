@@ -1,5 +1,22 @@
 <app-header></app-header>
+
+<div *ngIf="showModal"> 
+  <div class="investa-modal" (click)="hideModal()" >
+  <div class="investa-modal-container">
+    <div class="top"> <button (click)="hideModal()">&times;</button></div>
+    <div class="investa-modal-info">
+        <p>{{errorMessage}}</p>
+    </div>
+      
+  </div>
+  
+</div>
+</div>
 <section>
+  <div *ngIf="loading" class="loading-div">
+    <div class="loading-inner"></div>
+
+</div>
   <div class="login-container">
     <div class="investa">
         <h1>INVESTA</h1>
@@ -10,7 +27,6 @@
         <form novalidate [formGroup]="myform"
               (ngSubmit)="onSubmit()"
         >
-        
           <div class="form-item"
           [ngClass]="{'has-danger': email.invalid && (email.dirty || email.touched),
           'has-success': email.valid && (email.touched || email.dirty)
@@ -95,7 +111,7 @@
              value="SUBMIT" 
              class="btn reg-btn"
              [disabled]="checked"
-             [ngClass]="checked ? 'disabled' : 'enabled'"
+             [ngClass]="checked ? 'disabled' : 'enabled' "
              >
           </div>
             <div class="under-text">

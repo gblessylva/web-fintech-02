@@ -23,18 +23,15 @@ import { Router } from '@angular/router';
 
 export class SignupComponent implements OnInit {
 
-  langs: string[] = [
-    'English',
-    'French',
-    'German',
-  ];
   myform: FormGroup;
   email: FormControl;
   password: FormControl;
   username: FormControl;
   confirmPassword: FormControl;
   checked: boolean = true
-  shaped: boolean = false
+  showModal: boolean = false
+  errorMessage = []
+  loading: boolean = false
 
   constructor(private DataService: DataServiceService, private router: Router) {  }
 
@@ -75,26 +72,33 @@ export class SignupComponent implements OnInit {
   changed(){
     this.checked = !this.checked    
   }
-  shape(){
-    this.shaped = !this.shaped
-    console.log(this.shaped)
+  
+  hideModal(){
+    this.showModal = false;
   }
+
   onSubmit() {
-    
-    
     if (this.myform.valid) {
+      window.scroll(0,0);
+      this.loading = true
       const newUser = this.myform.value
       this.DataService.registerUser(newUser).subscribe(resp=>{
-        console.log(resp)
+        if(resp.body.success != true){
+          this.loading = false
+          let serverError = resp.body.errMsg[0].message
+          this.errorMessage = serverError
+          this.showModal =true;
+          console.log(this.errorMessage)
+          
+        }else{
+        setTimeout(()=>{
+            this.redirect()
+          }, 1000)
+        }
+       
       }, (error)=>{
         console.error('An error occured', error)
-      })
-    
-      // console.log(this.myform.value);
-      // setTimeout(()=>{
-      //    this.redirect()
-      // }, 1000)
-     
+      })     
     }else{
       console.log('Invalid values found')
     }
