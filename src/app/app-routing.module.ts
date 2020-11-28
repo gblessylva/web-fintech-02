@@ -19,6 +19,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { NewProjectComponent } from './auth/dashboard/new-project/new-project.component';
 import { AddNewMilestoneComponent } from './auth/dashboard/add-new-milestone/add-new-milestone.component';
 import { ConfirmMailComponent } from './components/confirm-mail/confirm-mail.component';
+import { VerifyAccountComponent } from './auth/verify-account/verify-account.component';
 
 
 const route: Routes = [
@@ -26,10 +27,11 @@ const route: Routes = [
       { path: '', component: HomeComponent },
       { path: 'about', component: AboutComponent},
       { path: 'contact', component: ContactComponent},
-      { path: 'login', component: LoginComponent},
+      { path: 'login', component: LoginComponent}, 
       { path: 'register', component: SignupComponent},
       { path: 'FAQ', component: FaqComponent},
       { path: '404', component: NotfoundComponent},
+      {path: 'verify-account/:userId/:code', component: VerifyAccountComponent},
       {
         path: 'projects', 
         component: ProjectsComponent, 

@@ -95,7 +95,7 @@ export class SignupComponent implements OnInit {
             this.redirect()
           }, 1000)
         }
-       
+      
       }, (error)=>{
         console.error('An error occured', error)
       })     

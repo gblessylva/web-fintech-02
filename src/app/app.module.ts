@@ -34,6 +34,7 @@ import { NewProjectComponent } from './auth/dashboard/new-project/new-project.co
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AddNewMilestoneComponent } from './auth/dashboard/add-new-milestone/add-new-milestone.component';
 import { ConfirmMailComponent } from './components/confirm-mail/confirm-mail.component';
+import { VerifyAccountComponent } from './auth/verify-account/verify-account.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { ConfirmMailComponent } from './components/confirm-mail/confirm-mail.com
     FaqComponent, 
     NewProjectComponent,
     AddNewMilestoneComponent,
-    ConfirmMailComponent
+    ConfirmMailComponent,
+    VerifyAccountComponent
   ],
   imports: [
     BrowserModule,

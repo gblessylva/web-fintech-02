@@ -60,4 +60,8 @@ export class DataServiceService {
     return this.http.post(`${this.API_URL}sme/register`, userInfo, {observe : 'response'})
   }
 
+  verifyNewAccount(userId, code){
+    return this.http.get(`http://localhost:2020/api/v1/auth/verify-account/${userId}/${code}`, {observe: 'response'})
+  }
+
 }
