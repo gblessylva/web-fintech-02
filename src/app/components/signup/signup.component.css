@@ -134,6 +134,61 @@
     font-weight: lighter;
   }
   
+  .has-danger p, .danger{
+    color:red;
+    padding-top: 10px;
+  }
+  .has-success{
+    position: relative;
+  }
+  .has-success input{
+    border: 1px solid green;
+  }
+  .has-danger input {
+    border: 1px solid red;
+  }
+  .has-success:after{
+    content: '\2713';
+    color: green;
+    font-size: 20px;
+    position: absolute;
+    right: 20px;
+    top: 40px;
+    border: 1px solid green;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+
+  }
+  .disabled{
+    background: #424242;
+    cursor: not-allowed;
+  }
+  .enabled{
+    cursor: pointer;
+    animation: button-shape 0.5s forwards ;
+  }
+  .enabled:hover{
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+  }
+  
+  .shape-btn{
+    animation: button-circle 0.5s forwards ;
+  }
+
+  @keyframes button-shape {
+    0%{
+      width: 10px;
+    }
+  }
+
+  @keyframes button-circle {
+    0%{
+      width: 20px;
+    }
+  }
   
   /* MEDIA QUERIES */
   

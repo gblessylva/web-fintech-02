@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import { retry, catchError } from 'rxjs/operators';
 
+
 @Injectable()
 export class DataServiceService {
 
-  private API_URL = 'http://localhost:2020/api/v1/users';
+  private API_URL = 'http://localhost:2020/api/v1/';
 
   constructor(private http : HttpClient) {
 
@@ -52,4 +53,11 @@ export class DataServiceService {
     return this.http.get('http://localhost:2020/api/v1/milestones')
    }
  
+  registerUser(userInfo){
+    const body = JSON.stringify(userInfo)
+     const header = new HttpHeaders()
+     header.set('Content-Type', 'application/json; charset=utf-8')
+    return this.http.post(`${this.API_URL}sme/register`, userInfo, {observe : 'response'})
+  }
+
 }

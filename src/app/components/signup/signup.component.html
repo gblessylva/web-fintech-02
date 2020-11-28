@@ -6,56 +6,97 @@
         <p class="slogan">Connecting SMEs to investors</p>
     </div>
     <div class="login-form">
-        <h2>Register</h2>
-        <form action="" method="post">
-          <div class="form-item">
-            <label for="fullname">Full Name <span>*</span></label>
-            <input type="text" 
-            name="fullname" 
-            required
-            id="fullname" 
-            placeholder="John Smith">
-          </div>
-          <div class="form-item">
+        <h2>Register SME</h2>
+        <form novalidate [formGroup]="myform"
+              (ngSubmit)="onSubmit()"
+        >
+        
+          <div class="form-item"
+          [ngClass]="{'has-danger': email.invalid && (email.dirty || email.touched),
+          'has-success': email.valid && (email.touched || email.dirty)
+          }"
+          >
             <label for="email">Email Address <span>*</span></label>
             <input type="email" 
             name="email" 
             required
             id="email" 
+            formControlName="email"
             placeholder="john@smith.com">
           </div>
+          <div class="form-control-feedback"
+            *ngIf="email.errors && (email.touched || email.dirty)">
+            <p *ngIf="email.errors.required">Email Cannot be Blank</p>
+            <p *ngIf="email.errors.pattern">A valid email is required</p>
+
+          </div>
             
-          <div class="form-item">
+          <div class="form-item"
+            [ngClass]="{'has-danger': username.invalid && (username.touched || username.dirty),
+            'has-success' : username.valid && (username.touched || username.dirty)
+        }"
+          >
             <label for="username">Username <span>*</span></label>
             <input type="text" 
             name="username" 
             required
             id="lastname" 
+            formControlName="username"
             placeholder="johnsmith">
+            <div class="form-control-feedback"
+            *ngIf="username.errors && (username.touched || username.dirty)"
+            >
+              <p *ngIf="username.errors.required">Username is required</p>
+            </div>
           </div>
-          <div class="form-item"> 
+          <div class="form-item"
+            [ngClass]="{'has-danger': password.invalid && (password.touched || password.dirty),
+                'has-success': password.valid && (password.touched || password.dirty)
+              }"
+          > 
             <label for="password">Password <span>*</span></label>
             <input type="password" 
             name="password" 
             id="password"
-            required 
-            placeholder="********">
-          </div>
-          <div class="form-item">
-            <label for="password2">Confirm Password <span>*</span></label>
-            <input type="password" 
-            name="password2" 
-            id="password2" 
             required
+            formControlName="password" 
+            placeholder="********">
+            <div class="form-control-feedback"
+            *ngIf="password.errors && (password.touched || password.dirty)" 
+            >
+              <p *ngIf="password.errors.required">Password is Required</p>
+              <p *ngIf="password.errors.minlength">Password Strenght is weak</p>
+          </div>
+          </div>
+          
+          <div class="form-item" 
+            [ngClass]="{'has-danger': confirmPassword.value == '' && password.value != confirmPassword.value  &&  (confirmPassword.touched || confirmPassword.dirty ), 
+              'has-success':  password.value == confirmPassword.value  && (confirmPassword.touched || confirmPassword.dirty) }"
+          >
+            <label for="confirmPassword">Confirm Password <span>*</span></label>
+            <input type="password" 
+            name="confirmPassword" 
+            id="confirmPassword" 
+            required
+           formControlName="confirmPassword"
             placeholder="********">
           </div>
-          <div class="form-item">
-             <input type="checkbox" name="terms" id="terms"><label for="terms">Agree to <a href="#">terms & conditions</a></label>
+          <div class="form-control-feedback"
+          *ngIf="password.value != confirmPassword.value"
+          >
+          <p class="danger">Password Mismatch</p>
+            
           </div>
           <div class="form-item">
+             <input type="checkbox"  name="terms" id="terms" (change)="changed()"><label for="terms">Agree to <a href="#">terms & conditions</a></label>
+          </div>
+          <div class="form-item" >
              <input type="submit" 
              value="SUBMIT" 
-             class="btn reg-btn">
+             class="btn reg-btn"
+             [disabled]="checked"
+             [ngClass]="checked ? 'disabled' : 'enabled'"
+             >
           </div>
             <div class="under-text">
                 <p>Already have an account? <a href="/login">Login here</a>.</p>

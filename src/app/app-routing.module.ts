@@ -18,6 +18,7 @@ import { ProfileComponent } from './auth/dashboard/profile/profile.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { NewProjectComponent } from './auth/dashboard/new-project/new-project.component';
 import { AddNewMilestoneComponent } from './auth/dashboard/add-new-milestone/add-new-milestone.component';
+import { ConfirmMailComponent } from './components/confirm-mail/confirm-mail.component';
 
 
 const route: Routes = [
@@ -38,6 +39,10 @@ const route: Routes = [
         canActivate: [AuthGuard],   
         component: DashboardComponent   
     },
+    {
+      path: 'confirm-email',   
+      component: ConfirmMailComponent  
+  },
     {path: 'milestones', component: MilestonesComponent, canActivate: [AuthGuard] },
     {path:'add-project', component: NewProjectComponent, canActivate: [AuthGuard]},
     {path:'add-milestone', component: AddNewMilestoneComponent, canActivate: [AuthGuard]},
