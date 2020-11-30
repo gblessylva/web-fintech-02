@@ -18,6 +18,10 @@ import { ProfileComponent } from './auth/dashboard/profile/profile.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { NewProjectComponent } from './auth/dashboard/new-project/new-project.component';
 import { AddNewMilestoneComponent } from './auth/dashboard/add-new-milestone/add-new-milestone.component';
+import { ConfirmMailComponent } from './components/confirm-mail/confirm-mail.component';
+import { VerifyAccountComponent } from './auth/verify-account/verify-account.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { PasswordResetComponent } from './auth/password-reset/password-reset.component';
 
 
 const route: Routes = [
@@ -25,10 +29,13 @@ const route: Routes = [
       { path: '', component: HomeComponent },
       { path: 'about', component: AboutComponent},
       { path: 'contact', component: ContactComponent},
-      { path: 'login', component: LoginComponent},
+      { path: 'login', component: LoginComponent}, 
       { path: 'register', component: SignupComponent},
       { path: 'FAQ', component: FaqComponent},
       { path: '404', component: NotfoundComponent},
+      {path: 'verify-account/:userId/:code', component: VerifyAccountComponent},
+      {path: 'reset-password', component: ResetPasswordComponent},
+      {path: 'verify-password-reset/:code', component: PasswordResetComponent},
       {
         path: 'projects', 
         component: ProjectsComponent, 
@@ -38,6 +45,10 @@ const route: Routes = [
         canActivate: [AuthGuard],   
         component: DashboardComponent   
     },
+    {
+      path: 'confirm-email',   
+      component: ConfirmMailComponent  
+  },
     {path: 'milestones', component: MilestonesComponent, canActivate: [AuthGuard] },
     {path:'add-project', component: NewProjectComponent, canActivate: [AuthGuard]},
     {path:'add-milestone', component: AddNewMilestoneComponent, canActivate: [AuthGuard]},

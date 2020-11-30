@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import { retry, catchError } from 'rxjs/operators';
 
+
 @Injectable()
 export class DataServiceService {
 
-  private API_URL = 'http://localhost:2020/api/v1/users';
+  private API_URL = 'http://localhost:2020/api/v1/';
 
   constructor(private http : HttpClient) {
 
@@ -37,11 +38,11 @@ export class DataServiceService {
    }
 
    getProject(){
-     return this.http.get('http://localhost:2020/api/v1/projects')
+     return this.http.get(`${this.API_URL}projects`)
    }
 
    postProject(project: any){
-     const projectURL = 'http://localhost:2020/api/v1/projects';
+     const projectURL = `${this.API_URL}projects`;
      const body = JSON.stringify(project)
      const header = new HttpHeaders()
      header.set('Content-Type', 'application/json; charset=utf-8')
@@ -49,7 +50,36 @@ export class DataServiceService {
    }
 
    getMilestones(){
-    return this.http.get('http://localhost:2020/api/v1/milestones')
+    return this.http.get(`${this.API_URL}milestones`)
    }
  
+  registerUser(userInfo){
+    const body = JSON.stringify(userInfo)
+     const header = new HttpHeaders()
+     header.set('Content-Type', 'application/json; charset=utf-8')
+    return this.http.post(`${this.API_URL}sme/register`, userInfo, {observe : 'response'})
+  }
+
+  verifyNewAccount(userId, code){
+    return this.http.get(`${this.API_URL}auth/verify-account/${userId}/${code}`, {observe: 'response'})
+  }
+
+  login(userInfo){
+    const body = JSON.stringify(userInfo)
+    const header = new HttpHeaders()
+    header.set('Content-Type', 'application/json; charset=utf-8')
+    return this.http.post(`${this.API_URL}auth/sme/login`, userInfo, {observe: 'response'})
+  }
+  passwordResetRequest(email){
+    const body = JSON.stringify(email)
+    const header = new HttpHeaders()
+    header.set('Content-Type', 'application/json; charset=utf-8')
+    return this.http.post(`${this.API_URL}auth/reset-password-code`, email, {observe: 'response'})
+  }
+  confirmPasswordReset(userInfo){
+    const body = JSON.stringify(userInfo)
+    const header = new HttpHeaders()
+    header.set('Content-Type', 'application/json; charset=utf-8')
+    return this.http.post(`${this.API_URL}auth/reset-password/`, userInfo, {observe: 'response'})
+  }
 }

@@ -46,6 +46,9 @@ export class AuthService {
       logout(): void {
         this.currentUser = null;
       }
+
+      registerSME 
+
     }
 
     

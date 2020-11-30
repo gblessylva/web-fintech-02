@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // constructor(private mediaObserver: MediaObserver) {}
   ngOnInit() {
-    console.log(' welocme ');
+   
     // this.mediaSub = this.mediaObserver.asObservable().
     //   .subscribe(
     //     (result: MediaChange) => {

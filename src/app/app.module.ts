@@ -33,6 +33,10 @@ import { FaqComponent } from './components/faq/faq.component';
 import { NewProjectComponent } from './auth/dashboard/new-project/new-project.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AddNewMilestoneComponent } from './auth/dashboard/add-new-milestone/add-new-milestone.component';
+import { ConfirmMailComponent } from './components/confirm-mail/confirm-mail.component';
+import { VerifyAccountComponent } from './auth/verify-account/verify-account.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { PasswordResetComponent } from './auth/password-reset/password-reset.component';
 
 
 @NgModule({
@@ -60,7 +64,11 @@ import { AddNewMilestoneComponent } from './auth/dashboard/add-new-milestone/add
     MessageComponent,
     FaqComponent, 
     NewProjectComponent,
-    AddNewMilestoneComponent
+    AddNewMilestoneComponent,
+    ConfirmMailComponent,
+    VerifyAccountComponent,
+    ResetPasswordComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,
