@@ -35,6 +35,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AddNewMilestoneComponent } from './auth/dashboard/add-new-milestone/add-new-milestone.component';
 import { ConfirmMailComponent } from './components/confirm-mail/confirm-mail.component';
 import { VerifyAccountComponent } from './auth/verify-account/verify-account.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { PasswordResetComponent } from './auth/password-reset/password-reset.component';
 
 
 @NgModule({
@@ -64,7 +66,9 @@ import { VerifyAccountComponent } from './auth/verify-account/verify-account.com
     NewProjectComponent,
     AddNewMilestoneComponent,
     ConfirmMailComponent,
-    VerifyAccountComponent
+    VerifyAccountComponent,
+    ResetPasswordComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,

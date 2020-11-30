@@ -20,6 +20,8 @@ import { NewProjectComponent } from './auth/dashboard/new-project/new-project.co
 import { AddNewMilestoneComponent } from './auth/dashboard/add-new-milestone/add-new-milestone.component';
 import { ConfirmMailComponent } from './components/confirm-mail/confirm-mail.component';
 import { VerifyAccountComponent } from './auth/verify-account/verify-account.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { PasswordResetComponent } from './auth/password-reset/password-reset.component';
 
 
 const route: Routes = [
@@ -32,6 +34,8 @@ const route: Routes = [
       { path: 'FAQ', component: FaqComponent},
       { path: '404', component: NotfoundComponent},
       {path: 'verify-account/:userId/:code', component: VerifyAccountComponent},
+      {path: 'reset-password', component: ResetPasswordComponent},
+      {path: 'verify-password-reset/:code', component: PasswordResetComponent},
       {
         path: 'projects', 
         component: ProjectsComponent, 
