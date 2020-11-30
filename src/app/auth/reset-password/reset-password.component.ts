@@ -15,6 +15,7 @@ export class ResetPasswordComponent implements OnInit {
   loading: boolean = false
   errorMessage : any
   showModal: boolean = false
+  resp : any = {}
   constructor(private router : Router, private Dataservice: DataServiceService) { }
 
   ngOnInit() {
@@ -37,16 +38,17 @@ export class ResetPasswordComponent implements OnInit {
     window.scroll(0,0)
     this.loading = true
    let email = this.resetResquestForm.value
-    this.Dataservice.passwordResetRequest(email).subscribe(resp=>{
-      if(resp.body.success != true){
+    this.Dataservice.passwordResetRequest(email).subscribe(data=>{
+      this.resp = data
+      if(this.resp.body.success != true){
         this.showModal = true
-        this.errorMessage = resp.body.errMsg[0].message
+        this.errorMessage = this.resp.body.errMsg[0].message
         this.loading = false
         this.resetResquestForm.reset()
       }else{
         this.loading = false;
         this.showModal = true
-        this.errorMessage = resp.body.message
+        this.errorMessage = this.resp.body.message
         this.resetResquestForm.reset()
 
       }
