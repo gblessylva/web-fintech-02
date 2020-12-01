@@ -58,7 +58,7 @@ export class LoginComponent  {
       window.scroll(0,0);
       this.loading = true
       const user = this.loginForm.value;
-      this.DataService.login(user).subscribe(resp=>{
+      this.DataService.login(user).subscribe((resp: any)=>{
         if(resp.body.success == false){
           this.showModal = true
           this.errorMessage = resp.body.errMsg[0].message

@@ -82,7 +82,7 @@ export class SignupComponent implements OnInit {
       window.scroll(0,0);
       this.loading = true
       const newUser = this.myform.value
-      this.DataService.registerUser(newUser).subscribe(resp=>{
+      this.DataService.registerUser(newUser).subscribe((resp: any)=>{
         if(resp.body.success != true){
           this.loading = false
           let serverError = resp.body.errMsg[0].message
