@@ -62,7 +62,7 @@ export class PasswordResetComponent implements OnInit {
       code: this.route.snapshot.paramMap.get('code')
     }
 
-    this.Dataservice.confirmPasswordReset(userInfo).subscribe(resp=>{
+    this.Dataservice.confirmPasswordReset(userInfo).subscribe((resp: any)=>{
       
       this.loading = true
       if(resp.body.success !=true){

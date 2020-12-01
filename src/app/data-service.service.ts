@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import { retry, catchError } from 'rxjs/operators';
-
+import {ResponseHelper} from '../app/ResponseHelper'
 
 @Injectable()
 export class DataServiceService {
@@ -74,12 +74,12 @@ export class DataServiceService {
     const body = JSON.stringify(email)
     const header = new HttpHeaders()
     header.set('Content-Type', 'application/json; charset=utf-8')
-    return this.http.post(`${this.API_URL}auth/reset-password-code`, email, {observe: 'response'})
+    return this.http.post<ResponseHelper>(`${this.API_URL}auth/reset-password-code`, email, {observe: 'response'})
   }
   confirmPasswordReset(userInfo){
     const body = JSON.stringify(userInfo)
     const header = new HttpHeaders()
     header.set('Content-Type', 'application/json; charset=utf-8')
-    return this.http.post(`${this.API_URL}auth/reset-password/`, userInfo, {observe: 'response'})
+    return this.http.post<ResponseHelper>(`${this.API_URL}auth/reset-password/`, userInfo, {observe: 'response'})
   }
 }
