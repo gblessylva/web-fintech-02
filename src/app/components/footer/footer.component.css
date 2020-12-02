@@ -129,6 +129,7 @@ color: #FFFFFF;
     }
     .quicklinks-wrapper, .contact-us{
         width: 100%;
+        padding: 0;
     }
     .quicklinks{
         height: fit-content;
