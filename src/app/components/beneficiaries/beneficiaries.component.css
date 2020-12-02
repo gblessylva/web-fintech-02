@@ -92,3 +92,10 @@ color: #F81F01;
     background: #343a40;
     color: white;
 }
+
+@media screen and (max-width: 768px) {
+.items-container{
+    flex-direction: column;
+}
+
+}
