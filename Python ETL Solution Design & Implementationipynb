@@ -1,0 +1,1538 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/gblessylva/web-fintech-02/blob/develop/Python%20ETL%20Solution%20Design%20%26%20Implementationipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "BYKXLBLQNIj1"
+      },
+      "outputs": [],
+      "source": [
+        "#Import Pandas\n",
+        "import pandas as pd"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "data_firebridge = pd.read_csv(\"/content/FireBrigadeAndAmbulanceCallOuts.csv\")"
+      ],
+      "metadata": {
+        "id": "DmxcaO4sPkzc"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "P9_MlDtwWu27",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "c3e93ee8-e9e9-4b1e-884a-665f59377c74"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "             Date    Station Area   Description  ...        AH       MAV        CD\n",
+            "0      01/01/2013     Rathfarnham     S/S OTHER  ...  02:28:54  02:48:54  03:08:54\n",
+            "1      01/01/2013        Tallaght      Fire CAR  ...  02:25:43  02:45:43  03:05:43\n",
+            "2      01/01/2013    North Strand       S/S RTA  ...  04:11:20  04:31:20  04:51:20\n",
+            "3      01/01/2013        Tallaght      Fire CAR  ...  04:50:48  05:10:48  05:30:48\n",
+            "4      01/01/2013         Finglas  Fire DOM PER  ...  04:50:47  05:10:47  05:30:47\n",
+            "...           ...             ...           ...  ...       ...       ...       ...\n",
+            "38551  28/04/2018  Blanchardstown    Fire ALARM  ...       NaN  00:20:00  00:40:00\n",
+            "38552  09/10/2018      Kilbarrack      Fire CAR  ...       NaN  00:20:00  00:40:00\n",
+            "38553  07/06/2018        Skerries    Fire SMALL  ...       NaN         -         -\n",
+            "38554  21/11/2018      Donnybrook    Fire ALARM  ...       NaN         -         -\n",
+            "38555  01/01/2019      Kilbarrack    Fire ALARM  ...       NaN         -         -\n",
+            "\n",
+            "[38556 rows x 11 columns]\n"
+          ]
+        }
+      ],
+      "source": [
+        "print(data_firebridge)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "rkmMG9E2Zjoq",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "f65d04fb-8709-44a9-840f-67bb6085d91c"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Total Number of Rows and Columns (38556, 11)\n"
+          ]
+        }
+      ],
+      "source": [
+        "#Output the total number of rows and columns\n",
+        "output = (data_firebridge.shape)\n",
+        "\n",
+        "print(\"Total Number of Rows and Columns\", output)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "data_firebridge.describe()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 173
+        },
+        "id": "yP6UMVACnxW_",
+        "outputId": "ac6fe970-fc74-4d87-9d22-e47424263ba8"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>Date</th>\n",
+              "      <th>Station Area</th>\n",
+              "      <th>Description</th>\n",
+              "      <th>TOC</th>\n",
+              "      <th>ORD</th>\n",
+              "      <th>MOB</th>\n",
+              "      <th>IA</th>\n",
+              "      <th>LS</th>\n",
+              "      <th>AH</th>\n",
+              "      <th>MAV</th>\n",
+              "      <th>CD</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>count</th>\n",
+              "      <td>38556</td>\n",
+              "      <td>38556</td>\n",
+              "      <td>38556</td>\n",
+              "      <td>38556</td>\n",
+              "      <td>38556</td>\n",
+              "      <td>37311</td>\n",
+              "      <td>30962</td>\n",
+              "      <td>38556</td>\n",
+              "      <td>153</td>\n",
+              "      <td>38530</td>\n",
+              "      <td>38530</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>unique</th>\n",
+              "      <td>1102</td>\n",
+              "      <td>16</td>\n",
+              "      <td>59</td>\n",
+              "      <td>29926</td>\n",
+              "      <td>30099</td>\n",
+              "      <td>29148</td>\n",
+              "      <td>25249</td>\n",
+              "      <td>25249</td>\n",
+              "      <td>118</td>\n",
+              "      <td>120</td>\n",
+              "      <td>120</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>top</th>\n",
+              "      <td>31/10/2013</td>\n",
+              "      <td>Tallaght</td>\n",
+              "      <td>Fire SMALL</td>\n",
+              "      <td>18:47:33</td>\n",
+              "      <td>21:03:52</td>\n",
+              "      <td>13:54:46</td>\n",
+              "      <td>18:15:04</td>\n",
+              "      <td>00:10:00</td>\n",
+              "      <td>00:30:00</td>\n",
+              "      <td>00:20:00</td>\n",
+              "      <td>00:40:00</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>freq</th>\n",
+              "      <td>167</td>\n",
+              "      <td>6525</td>\n",
+              "      <td>12039</td>\n",
+              "      <td>6</td>\n",
+              "      <td>6</td>\n",
+              "      <td>6</td>\n",
+              "      <td>7</td>\n",
+              "      <td>7595</td>\n",
+              "      <td>32</td>\n",
+              "      <td>38370</td>\n",
+              "      <td>38370</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "              Date Station Area Description  ...        AH       MAV        CD\n",
+              "count        38556        38556       38556  ...       153     38530     38530\n",
+              "unique        1102           16          59  ...       118       120       120\n",
+              "top     31/10/2013     Tallaght  Fire SMALL  ...  00:30:00  00:20:00  00:40:00\n",
+              "freq           167         6525       12039  ...        32     38370     38370\n",
+              "\n",
+              "[4 rows x 11 columns]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 12
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Shows the number of missing values\n",
+        "data_firebridge.info()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "mDDSzyfcn18_",
+        "outputId": "427e6c06-bc22-4982-960d-b5e383788f89"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "<class 'pandas.core.frame.DataFrame'>\n",
+            "RangeIndex: 38556 entries, 0 to 38555\n",
+            "Data columns (total 11 columns):\n",
+            " #   Column        Non-Null Count  Dtype \n",
+            "---  ------        --------------  ----- \n",
+            " 0   Date          38556 non-null  object\n",
+            " 1   Station Area  38556 non-null  object\n",
+            " 2   Description   38556 non-null  object\n",
+            " 3   TOC           38556 non-null  object\n",
+            " 4   ORD           38556 non-null  object\n",
+            " 5   MOB           37311 non-null  object\n",
+            " 6   IA            30962 non-null  object\n",
+            " 7   LS            38556 non-null  object\n",
+            " 8   AH            153 non-null    object\n",
+            " 9   MAV           38530 non-null  object\n",
+            " 10  CD            38530 non-null  object\n",
+            "dtypes: object(11)\n",
+            "memory usage: 3.2+ MB\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#To find and fill the missing data in the dataset\n",
+        "data_firebridge.isnull().sum()"
+      ],
+      "metadata": {
+        "id": "nDQGPGZ4YOsN",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "f9f013c6-a6e7-4f15-e0e5-78554018ea48"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "Date                0\n",
+              "Station Area        0\n",
+              "Description         0\n",
+              "TOC                 0\n",
+              "ORD                 0\n",
+              "MOB              1245\n",
+              "IA               7594\n",
+              "LS                  0\n",
+              "AH              38403\n",
+              "MAV                26\n",
+              "CD                 26\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 14
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#To find duplicate values in the dataset\n",
+        "data_firebridge.duplicated().sum()"
+      ],
+      "metadata": {
+        "id": "0bwUeVKCYQlw",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "dad77cdf-1356-4808-92df-725ea74d1a56"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 15
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "3MC6TinCeluo",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "1ddc036e-9347-4d2b-d21a-938c32714781"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Number of non-null rows by column Date            38556\n",
+            "Station Area    38556\n",
+            "Description     38556\n",
+            "TOC             38556\n",
+            "ORD             38556\n",
+            "MOB             37311\n",
+            "IA              30962\n",
+            "LS              38556\n",
+            "AH                153\n",
+            "MAV             38530\n",
+            "CD              38530\n",
+            "dtype: int64\n"
+          ]
+        }
+      ],
+      "source": [
+        "#Output the number of non-null rows (by column)\n",
+        "output = (data_firebridge.notnull().sum())\n",
+        "print(\"Number of non-null rows by column\", (output))"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "4qI5qkRWnWcW",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "4ee0dc52-b7eb-410b-b754-6ab07c439fd8"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Number of null values by column:\n",
+            " Date                0\n",
+            "Station Area        0\n",
+            "Description         0\n",
+            "TOC                 0\n",
+            "ORD                 0\n",
+            "MOB              1245\n",
+            "IA               7594\n",
+            "LS                  0\n",
+            "AH              38403\n",
+            "MAV                26\n",
+            "CD                 26\n",
+            "dtype: int64\n"
+          ]
+        }
+      ],
+      "source": [
+        "#Output the number of null values (by column)\n",
+        "output = (data_firebridge.isnull().sum())\n",
+        "print(\"Number of null values by column:\\n\", (output))"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Output the number of null values for all columns.\n",
+        "output = (data_firebridge.isna().sum().sum())\n",
+        "print(\"Total number of null values in all columns:\", (output))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "tVlF3hKHAMKU",
+        "outputId": "055da41a-4490-406e-aed2-28bb0f61b568"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Total number of null values in all columns: 47294\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "5_oD09qIuTgY",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "b377d10a-c1fe-44d2-fef0-f3298a31921b"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Total Number of null values of call outs by Station Area: Tallaght          6525\n",
+            "Dolphins Barn     4018\n",
+            "Tara St           3600\n",
+            "Kilbarrack        3548\n",
+            "Dun Laoghaire     3271\n",
+            "Phibsborough      3160\n",
+            "Finglas           3030\n",
+            "Swords            2614\n",
+            "Rathfarnham       2129\n",
+            "Blanchardstown    2089\n",
+            "Donnybrook        1787\n",
+            "North Strand      1645\n",
+            "Balbriggan         688\n",
+            "Skerries           449\n",
+            "Dunshaughlin         2\n",
+            "MH14                 1\n",
+            "Name: Station Area, dtype: int64\n"
+          ]
+        }
+      ],
+      "source": [
+        "#Output the total number of call outs by Station Area\n",
+        "print(\"Total Number of null values of call outs by Station Area:\", data_firebridge[\"Station Area\"].value_counts())"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "1t_cvX8B9VvJ",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "cd0ae6a8-099c-45bf-fecb-4ac4cb6b29ac"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "('Output the Total Number of call outs by Date and Station Area:\\n', Date        Station Area  \n",
+            "01/01/2013  Balbriggan        3\n",
+            "            Blanchardstown    1\n",
+            "            Dolphins Barn     4\n",
+            "            Donnybrook        1\n",
+            "            Dun Laoghaire     3\n",
+            "                             ..\n",
+            "31/12/2015  Donnybrook        1\n",
+            "            Dun Laoghaire     1\n",
+            "            Finglas           3\n",
+            "            North Strand      1\n",
+            "            Tallaght          5\n",
+            "Length: 12483, dtype: int64)\n"
+          ]
+        }
+      ],
+      "source": [
+        "#Output the total number of call outs by Date and Station Area\n",
+        "output = (\"Output the Total Number of call outs by Date and Station Area:\\n\", data_firebridge.groupby(['Date', 'Station Area']).size())\n",
+        "print(output)\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "JNF_RM5tOKvf",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "2fceb904-679a-4d05-89f1-2a9ae3beff94"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Total Number of Calls out where Description is Fire Car or Fire Alarm:\n",
+            "  Description    10252\n",
+            "dtype: int64\n"
+          ]
+        }
+      ],
+      "source": [
+        "#Output the total number of call outs by Station Area and Date where the description is either Fire Car or Fire Alarm.\n",
+        "description = data_firebridge[(data_firebridge['Description'] == 'Fire CAR') |\n",
+        "                              (data_firebridge['Description'] == 'Fire ALARM')]\n",
+        "            \n",
+        "print(\"Total Number of Calls out where Description is Fire Car or Fire Alarm:\\n \", description[['Description']].count())"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "output = (\"Output the Total Number of call outs by Date and Station Area:\\n\", description.groupby(['Date', 'Station Area']).size())\n",
+        "print(output)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "B257QHR8B6A4",
+        "outputId": "b42d0a22-f38d-4f58-9e0e-2c9ea3cf5f86"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "('Output the Total Number of call outs by Date and Station Area:\\n', Date        Station Area  \n",
+            "01/01/2013  Balbriggan        3\n",
+            "            Blanchardstown    1\n",
+            "            Dun Laoghaire     1\n",
+            "            Kilbarrack        2\n",
+            "            Tallaght          4\n",
+            "                             ..\n",
+            "31/12/2014  Kilbarrack        1\n",
+            "            Rathfarnham       2\n",
+            "            Tallaght          1\n",
+            "31/12/2015  North Strand      1\n",
+            "            Tallaght          2\n",
+            "Length: 6792, dtype: int64)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "UUlkGk63Qd0t"
+      },
+      "outputs": [],
+      "source": [
+        "#Replace any instance of “,” (in any column) with an empty string\n",
+        "data_firebridge.replace(\",\", \"\", inplace=True)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#import Numpy as np\n",
+        "import numpy as np\n"
+      ],
+      "metadata": {
+        "id": "cvLVwLwVDXhg"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "6LpQ7F0XSZtI"
+      },
+      "outputs": [],
+      "source": [
+        "#Replace any instance of “-” (in any column) with an empty string.\n",
+        "data_firebridge.replace(\"\", np.nan, inplace=True)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "SBFNJlzxSxBm"
+      },
+      "outputs": [],
+      "source": [
+        "#Drop rows for the columns (AH, MAV, CD) where at least one row value is NULL\n",
+        "\n",
+        "columnslist = [\"AH\", \"MAV\", \"CD\"]\n",
+        "data_firebridge.dropna(subset=columnslist, inplace=True)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "uOoSFklvTdRF"
+      },
+      "outputs": [],
+      "source": [
+        "#Drop any duplicate rows (except for the first occurrence)\n",
+        "data_firebridge.drop_duplicates(inplace=True)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "_sSLOmgeVUqH",
+        "outputId": "4ab5f5e1-860f-4ea3-c7ba-c049102f38ff"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "The Minimum Time Difference between ORDS AND TOC:  0 days 00:00:30\n"
+          ]
+        }
+      ],
+      "source": [
+        "#Output the minimum time difference between TOC and ORD\n",
+        "TOC = pd.to_datetime(data_firebridge['TOC'], format=\"%H:%M:%S\")\n",
+        "ORDS = pd.to_datetime(data_firebridge['ORD'], format=\"%H:%M:%S\")\n",
+        "minTimeDiff = ORDS - TOC\n",
+        "print(\"The Minimum Time Difference between ORDS AND TOC: \", minTimeDiff.min())"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Verify the total number of rows and columns after performing drop operation and verify if AH column with null value shows any rows or not\n",
+        "print(\"Total Number of Rows:\" ,len(data_firebridge))\n",
+        "print(\"Total Number of Columns:\" ,len(data_firebridge.columns))\n",
+        "print(data_firebridge.loc[data_firebridge['AH'] == ''])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "m7MgJXheCgrB",
+        "outputId": "fd4dd469-e006-41a4-9fba-62bc5ac3b46b"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Total Number of Rows: 147\n",
+            "Total Number of Columns: 11\n",
+            "Empty DataFrame\n",
+            "Columns: [Date, Station Area, Description, TOC, ORD, MOB, IA, LS, AH, MAV, CD]\n",
+            "Index: []\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Check if any duplicate rows exists\n",
+        "print(data_firebridge[data_firebridge.duplicated()])\n",
+        "print(\"Total Number of Rows:\" ,len(data_firebridge))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "udRWbAd0CzJl",
+        "outputId": "a8ccc840-1d29-4352-ecc8-701b862dfea7"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Empty DataFrame\n",
+            "Columns: [Date, Station Area, Description, TOC, ORD, MOB, IA, LS, AH, MAV, CD]\n",
+            "Index: []\n",
+            "Total Number of Rows: 147\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "data_firebridge.dtypes"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "jMZRoCR_DhHx",
+        "outputId": "6d068257-a64e-4723-d1f3-18cd259e326e"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "Date            object\n",
+              "Station Area    object\n",
+              "Description     object\n",
+              "TOC             object\n",
+              "ORD             object\n",
+              "MOB             object\n",
+              "IA              object\n",
+              "LS              object\n",
+              "AH              object\n",
+              "MAV             object\n",
+              "CD              object\n",
+              "dtype: object"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 31
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Display last five rows of dataset\n",
+        "data_firebridge.tail()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 204
+        },
+        "id": "w9Fs-kO5WRrL",
+        "outputId": "913831e6-3cbb-4a2d-b8c2-4143e0074220"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>Date</th>\n",
+              "      <th>Station Area</th>\n",
+              "      <th>Description</th>\n",
+              "      <th>TOC</th>\n",
+              "      <th>ORD</th>\n",
+              "      <th>MOB</th>\n",
+              "      <th>IA</th>\n",
+              "      <th>LS</th>\n",
+              "      <th>AH</th>\n",
+              "      <th>MAV</th>\n",
+              "      <th>CD</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>169</th>\n",
+              "      <td>05/01/2013</td>\n",
+              "      <td>Dun Laoghaire</td>\n",
+              "      <td>S/S AMBASS</td>\n",
+              "      <td>23:03:21</td>\n",
+              "      <td>23:04:19</td>\n",
+              "      <td>23:05:40</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>00:10:00</td>\n",
+              "      <td>00:30:00</td>\n",
+              "      <td>00:50:00</td>\n",
+              "      <td>01:10:00</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>170</th>\n",
+              "      <td>05/01/2013</td>\n",
+              "      <td>Phibsborough</td>\n",
+              "      <td>Fire ALARM</td>\n",
+              "      <td>23:22:52</td>\n",
+              "      <td>23:23:23</td>\n",
+              "      <td>23:25:06</td>\n",
+              "      <td>23:33:35</td>\n",
+              "      <td>23:43:35</td>\n",
+              "      <td>00:03:35</td>\n",
+              "      <td>00:23:35</td>\n",
+              "      <td>00:43:35</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>171</th>\n",
+              "      <td>05/01/2013</td>\n",
+              "      <td>Tallaght</td>\n",
+              "      <td>Fire CAR</td>\n",
+              "      <td>23:25:22</td>\n",
+              "      <td>23:27:11</td>\n",
+              "      <td>23:29:08</td>\n",
+              "      <td>23:34:41</td>\n",
+              "      <td>23:44:41</td>\n",
+              "      <td>00:04:41</td>\n",
+              "      <td>00:24:41</td>\n",
+              "      <td>00:44:41</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>172</th>\n",
+              "      <td>05/01/2013</td>\n",
+              "      <td>Kilbarrack</td>\n",
+              "      <td>Fire SMALL</td>\n",
+              "      <td>23:43:23</td>\n",
+              "      <td>23:44:34</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>23:49:07</td>\n",
+              "      <td>23:59:07</td>\n",
+              "      <td>00:19:07</td>\n",
+              "      <td>00:39:07</td>\n",
+              "      <td>00:59:07</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>173</th>\n",
+              "      <td>06/01/2013</td>\n",
+              "      <td>Blanchardstown</td>\n",
+              "      <td>Fire CAR</td>\n",
+              "      <td>00:01:25</td>\n",
+              "      <td>00:03:57</td>\n",
+              "      <td>00:05:12</td>\n",
+              "      <td>00:08:32</td>\n",
+              "      <td>00:18:32</td>\n",
+              "      <td>00:38:32</td>\n",
+              "      <td>00:58:32</td>\n",
+              "      <td>01:18:32</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "           Date    Station Area Description  ...        AH       MAV        CD\n",
+              "169  05/01/2013   Dun Laoghaire  S/S AMBASS  ...  00:30:00  00:50:00  01:10:00\n",
+              "170  05/01/2013    Phibsborough  Fire ALARM  ...  00:03:35  00:23:35  00:43:35\n",
+              "171  05/01/2013        Tallaght    Fire CAR  ...  00:04:41  00:24:41  00:44:41\n",
+              "172  05/01/2013      Kilbarrack  Fire SMALL  ...  00:19:07  00:39:07  00:59:07\n",
+              "173  06/01/2013  Blanchardstown    Fire CAR  ...  00:38:32  00:58:32  01:18:32\n",
+              "\n",
+              "[5 rows x 11 columns]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 32
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Download the clean Data\n",
+        "data_firebridge.to_csv('firebridgecleaned.csv')"
+      ],
+      "metadata": {
+        "id": "eMnJQx96dJV6"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "9Ca-oXErhzwH",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "144cbfbd-65e7-423d-d66d-82f41204faba"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "OK\n",
+            "Ign:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64  InRelease\n",
+            "Get:2 https://cloud.r-project.org/bin/linux/ubuntu bionic-cran40/ InRelease [3,626 B]\n",
+            "Ign:3 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64  InRelease\n",
+            "Hit:4 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64  Release\n",
+            "Get:5 https://packages.microsoft.com/ubuntu/16.04/prod xenial InRelease [4,011 B]\n",
+            "Hit:6 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64  Release\n",
+            "Get:7 https://cloud.r-project.org/bin/linux/ubuntu bionic-cran40/ Packages [73.9 kB]\n",
+            "Get:8 http://ppa.launchpad.net/c2d4u.team/c2d4u4.0+/ubuntu bionic InRelease [15.9 kB]\n",
+            "Get:9 http://security.ubuntu.com/ubuntu bionic-security InRelease [88.7 kB]\n",
+            "Hit:11 http://archive.ubuntu.com/ubuntu bionic InRelease\n",
+            "Get:12 https://packages.microsoft.com/ubuntu/16.04/prod xenial/main amd64 Packages [272 kB]\n",
+            "Get:13 http://archive.ubuntu.com/ubuntu bionic-updates InRelease [88.7 kB]\n",
+            "Hit:15 http://ppa.launchpad.net/cran/libgit2/ubuntu bionic InRelease\n",
+            "Get:16 http://security.ubuntu.com/ubuntu bionic-security/restricted amd64 Packages [691 kB]\n",
+            "Get:17 http://archive.ubuntu.com/ubuntu bionic-backports InRelease [74.6 kB]\n",
+            "Get:18 http://ppa.launchpad.net/deadsnakes/ppa/ubuntu bionic InRelease [15.9 kB]\n",
+            "Get:19 http://archive.ubuntu.com/ubuntu bionic-updates/universe amd64 Packages [2,229 kB]\n",
+            "Get:20 http://security.ubuntu.com/ubuntu bionic-security/universe amd64 Packages [1,451 kB]\n",
+            "Get:21 http://security.ubuntu.com/ubuntu bionic-security/main amd64 Packages [2,461 kB]\n",
+            "Hit:22 http://ppa.launchpad.net/graphics-drivers/ppa/ubuntu bionic InRelease\n",
+            "Get:23 http://ppa.launchpad.net/c2d4u.team/c2d4u4.0+/ubuntu bionic/main Sources [1,820 kB]\n",
+            "Get:24 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 Packages [2,898 kB]\n",
+            "Get:25 http://ppa.launchpad.net/c2d4u.team/c2d4u4.0+/ubuntu bionic/main amd64 Packages [933 kB]\n",
+            "Get:26 http://ppa.launchpad.net/deadsnakes/ppa/ubuntu bionic/main amd64 Packages [45.9 kB]\n",
+            "Fetched 13.2 MB in 4s (3,062 kB/s)\n",
+            "Reading package lists...\n",
+            "Reading package lists...\n",
+            "Building dependency tree...\n",
+            "Reading state information...\n",
+            "The following additional packages will be installed:\n",
+            "  libodbc1 odbcinst odbcinst1debian2 unixodbc unixodbc-dev\n",
+            "Suggested packages:\n",
+            "  unixodbc-bin\n",
+            "The following NEW packages will be installed:\n",
+            "  msodbcsql17 unixodbc\n",
+            "The following packages will be upgraded:\n",
+            "  libodbc1 odbcinst odbcinst1debian2 unixodbc-dev\n",
+            "4 upgraded, 2 newly installed, 0 to remove and 69 not upgraded.\n",
+            "Need to get 1,458 kB of archives.\n",
+            "After this operation, 152 kB of additional disk space will be used.\n",
+            "Get:1 https://packages.microsoft.com/ubuntu/16.04/prod xenial/main amd64 odbcinst amd64 2.3.7 [12.0 kB]\n",
+            "Get:2 https://packages.microsoft.com/ubuntu/16.04/prod xenial/main amd64 unixodbc-dev amd64 2.3.7 [37.1 kB]\n",
+            "Get:3 https://packages.microsoft.com/ubuntu/16.04/prod xenial/main amd64 odbcinst1debian2 amd64 2.3.7 [135 kB]\n",
+            "Get:4 https://packages.microsoft.com/ubuntu/16.04/prod xenial/main amd64 libodbc1 amd64 2.3.7 [511 kB]\n",
+            "Get:5 https://packages.microsoft.com/ubuntu/16.04/prod xenial/main amd64 unixodbc amd64 2.3.7 [19.6 kB]\n",
+            "Get:6 https://packages.microsoft.com/ubuntu/16.04/prod xenial/main amd64 msodbcsql17 amd64 17.8.1.1-1 [744 kB]\n",
+            "Fetched 1,458 kB in 0s (5,896 kB/s)\n",
+            "(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 155222 files and directories currently installed.)\r\n",
+            "Preparing to unpack .../0-odbcinst_2.3.7_amd64.deb ...\r\n",
+            "Unpacking odbcinst (2.3.7) over (2.3.4-1.1ubuntu3) ...\r\n",
+            "Preparing to unpack .../1-unixodbc-dev_2.3.7_amd64.deb ...\r\n",
+            "Unpacking unixodbc-dev (2.3.7) over (2.3.4-1.1ubuntu3) ...\r\n",
+            "Preparing to unpack .../2-odbcinst1debian2_2.3.7_amd64.deb ...\r\n",
+            "Unpacking odbcinst1debian2:amd64 (2.3.7) over (2.3.4-1.1ubuntu3) ...\r\n",
+            "Preparing to unpack .../3-libodbc1_2.3.7_amd64.deb ...\r\n",
+            "Unpacking libodbc1:amd64 (2.3.7) over (2.3.4-1.1ubuntu3) ...\r\n",
+            "Selecting previously unselected package unixodbc.\r\n",
+            "Preparing to unpack .../4-unixodbc_2.3.7_amd64.deb ...\r\n",
+            "Unpacking unixodbc (2.3.7) ...\r\n",
+            "Selecting previously unselected package msodbcsql17.\r\n",
+            "Preparing to unpack .../5-msodbcsql17_17.8.1.1-1_amd64.deb ...\r\n",
+            "debconf: unable to initialize frontend: Dialog\r\n",
+            "debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 76.)\r\n",
+            "debconf: falling back to frontend: Readline\r\n",
+            "Unpacking msodbcsql17 (17.8.1.1-1) ...\r\n",
+            "Setting up libodbc1:amd64 (2.3.7) ...\r\n",
+            "Setting up odbcinst1debian2:amd64 (2.3.7) ...\r\n",
+            "Setting up odbcinst (2.3.7) ...\r\n",
+            "Setting up unixodbc (2.3.7) ...\r\n",
+            "Setting up unixodbc-dev (2.3.7) ...\r\n",
+            "Setting up msodbcsql17 (17.8.1.1-1) ...\r\n",
+            "Processing triggers for libc-bin (2.27-3ubuntu1.3) ...\r\n",
+            "/sbin/ldconfig.real: /usr/local/lib/python3.7/dist-packages/ideep4py/lib/libmkldnn.so.0 is not a symbolic link\r\n",
+            "\r\n",
+            "Processing triggers for man-db (2.8.3-2ubuntu0.1) ...\r\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n",
+            "                                 Dload  Upload   Total   Spent    Left  Speed\n",
+            "\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: apt-key output should not be parsed (stdout is not a terminal)\n",
+            "\r100   983  100   983    0     0   6467      0 --:--:-- --:--:-- --:--:--  6467\n",
+            "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n",
+            "                                 Dload  Upload   Total   Spent    Left  Speed\n",
+            "\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100    79  100    79    0     0   1000      0 --:--:-- --:--:-- --:--:--  1000\n",
+            "debconf: unable to initialize frontend: Dialog\n",
+            "debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 76, <> line 6.)\n",
+            "debconf: falling back to frontend: Readline\n",
+            "debconf: unable to initialize frontend: Readline\n",
+            "debconf: (This frontend requires a controlling tty.)\n",
+            "debconf: falling back to frontend: Teletype\n",
+            "dpkg-preconfigure: unable to re-open stdin: \n"
+          ]
+        }
+      ],
+      "source": [
+        "%%sh\n",
+        "curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -\n",
+        "curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list\n",
+        "sudo apt-get update\n",
+        "sudo ACCEPT_EULA=Y apt-get -q -y install msodbcsql17"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "MXERaln_iDsI",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "65c4f2da-196b-424a-fac1-f063732d5c2a"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting pypyodbc\n",
+            "  Downloading pypyodbc-1.3.5.2.zip (25 kB)\n",
+            "\u001b[33mWARNING: Discarding https://files.pythonhosted.org/packages/ea/48/bb5412846df5b8f97d42ac24ac36a6b77a802c2778e217adc0d3ec1ee7bf/pypyodbc-1.3.5.2.zip#sha256=90a9a1fdbe5c06b875155d82562beb50bb22743190ca9b46a2cb71030ee65496 (from https://pypi.org/simple/pypyodbc/). Requested pypyodbc from https://files.pythonhosted.org/packages/ea/48/bb5412846df5b8f97d42ac24ac36a6b77a802c2778e217adc0d3ec1ee7bf/pypyodbc-1.3.5.2.zip#sha256=90a9a1fdbe5c06b875155d82562beb50bb22743190ca9b46a2cb71030ee65496 has inconsistent version: filename has '1.3.5.2', but metadata has '1.3.4'\u001b[0m\n",
+            "  Downloading pypyodbc-1.3.4.3.zip (24 kB)\n",
+            "\u001b[33mWARNING: Discarding https://files.pythonhosted.org/packages/4c/4a/ba2593783287fb56b04d629abdbb8bfd09bfbab2c3ca9f63e3831e7aa572/pypyodbc-1.3.4.3.zip#sha256=cf655760fb3d81d7ddae9aa053c06123762ae97bcc6ec5c4d26ac86497107092 (from https://pypi.org/simple/pypyodbc/). Requested pypyodbc from https://files.pythonhosted.org/packages/4c/4a/ba2593783287fb56b04d629abdbb8bfd09bfbab2c3ca9f63e3831e7aa572/pypyodbc-1.3.4.3.zip#sha256=cf655760fb3d81d7ddae9aa053c06123762ae97bcc6ec5c4d26ac86497107092 has inconsistent version: filename has '1.3.4.3', but metadata has '1.3.4'\u001b[0m\n",
+            "  Downloading pypyodbc-1.3.3.1.zip (23 kB)\n",
+            "\u001b[33mWARNING: Discarding https://files.pythonhosted.org/packages/5a/04/623370ba35a1e48fd64cdf247bec19495cc3a7f2f2f602a0d48aed80d612/pypyodbc-1.3.3.1.zip#sha256=ba1ae779dbad5f332d06ca73f22bc59674f509e25c44ed47eddf05382255c4fb (from https://pypi.org/simple/pypyodbc/). Requested pypyodbc from https://files.pythonhosted.org/packages/5a/04/623370ba35a1e48fd64cdf247bec19495cc3a7f2f2f602a0d48aed80d612/pypyodbc-1.3.3.1.zip#sha256=ba1ae779dbad5f332d06ca73f22bc59674f509e25c44ed47eddf05382255c4fb has inconsistent version: filename has '1.3.3.1', but metadata has '1.3.3'\u001b[0m\n",
+            "  Downloading pypyodbc-1.3.2.zip (23 kB)\n",
+            "Requirement already satisfied: setuptools in /usr/local/lib/python3.7/dist-packages (from pypyodbc) (57.4.0)\n",
+            "Building wheels for collected packages: pypyodbc\n",
+            "  Building wheel for pypyodbc (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "  Created wheel for pypyodbc: filename=pypyodbc-1.3.2-py3-none-any.whl size=22477 sha256=eb4fad7890e58b6ee9983dbbf6d042be262b81e3cd9f6dce4abc02bb56672813\n",
+            "  Stored in directory: /root/.cache/pip/wheels/7a/27/a1/dee80bc3ccf3443247f909705b46f6ed67dce756274f9d8954\n",
+            "Successfully built pypyodbc\n",
+            "Installing collected packages: pypyodbc\n",
+            "Successfully installed pypyodbc-1.3.2\n"
+          ]
+        }
+      ],
+      "source": [
+        "#Import your pypyodbc\n",
+        "!pip install pypyodbc\n",
+        "import pypyodbc"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "k6wpKHi8iklR"
+      },
+      "outputs": [],
+      "source": [
+        "#Setting up connection with VM\n",
+        "connection = pypyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'\n",
+        "'Server=20.123.145.6;'\n",
+        "'Database=master;'\n",
+        "'encrypt=yes;'\n",
+        "'TrustServerCertificate=yes;'\n",
+        "'UID=sa;'\n",
+        "'PWD=Ajewe1988.',autocommit = True)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "neeV87AalgaI"
+      },
+      "outputs": [],
+      "source": [
+        "cursor = connection.cursor()\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "AcVCbl7g8ksw"
+      },
+      "outputs": [],
+      "source": [
+        "cursor = connection.cursor()\n",
+        "SQLCommand = (\"CREATE DATABASE FIREBRIDGEANDAMBULANCE;\")\n",
+        "cursor.execute(SQLCommand)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print('done')"
+      ],
+      "metadata": {
+        "id": "VXA_odH5sg4d",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "7348aeb3-091f-4e34-d059-bed5dfde89ea"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "done\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "connection.close()"
+      ],
+      "metadata": {
+        "id": "Bh50Zma-4JzZ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "I1RCTmCl9d_g"
+      },
+      "outputs": [],
+      "source": [
+        "connection = pypyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'\n",
+        "'Server=20.123.145.6;'\n",
+        "'Database=FIREBRIDGEANDAMBULANCE;'\n",
+        "'encrypt=yes;'\n",
+        "'TrustServerCertificate=yes;'\n",
+        "'UID=sa;'\n",
+        "'PWD=Ajewe1988.',autocommit = True)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "cursor = connection.cursor()"
+      ],
+      "metadata": {
+        "id": "cLvsQdPOpryD"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "FnGEa_cq9neB"
+      },
+      "outputs": [],
+      "source": [
+        "#create table for storing df(dataframe) data\n",
+        "sqlquery = (\"\"\"CREATE TABLE AmbulanceBridgeData (\n",
+        "  Date VARCHAR(15),\n",
+        "  Station_Area VARCHAR(25),\n",
+        "  Description VARCHAR(20),\n",
+        "  TOC VARCHAR(10),\n",
+        "  ORD VARCHAR(10),\n",
+        "  MOB VARCHAR(10),\n",
+        "  IA VARCHAR(10),\n",
+        "  LS VARCHAR(10),\n",
+        "  AH VARCHAR(10),\n",
+        "  MAV VARCHAR(10),\n",
+        "  CD VARCHAR(10));\"\"\")\n",
+        "cursor.execute(sqlquery)\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#import sqlite3\n",
+        "import sqlite3"
+      ],
+      "metadata": {
+        "id": "8HtVkD9jRrAw"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#connect to sqlite\n",
+        "connection = sqlite3.connect('FIREBRIDGEANDAMBULANCE')\n",
+        "cursor = connection.cursor()"
+      ],
+      "metadata": {
+        "id": "KvobY5GtNVMh"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Write the data to a sqlite db table\n",
+        "data_firebridge.to_sql('AmbulanceBridgeData', connection, if_exists='replace', index = False)\n",
+        "connection.commit()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "MmakxTzWzpyS",
+        "outputId": "f6db7337-ddaf-4b42-effb-7d161266b76e"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "/usr/local/lib/python3.7/dist-packages/pandas/core/generic.py:2615: UserWarning: The spaces in these column names will not be changed. In pandas versions < 0.14, spaces were converted to underscores.\n",
+            "  method=method,\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#import your clean data set\n",
+        "AmbulanceBridgeData = pd.read_csv('/content/firebridgecleaned.csv')\n",
+        "connection.commit()"
+      ],
+      "metadata": {
+        "id": "rKMMNqkLt9cm"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#print the clean data set\n",
+        "print(AmbulanceBridgeData)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fAGUVbMKvG5T",
+        "outputId": "7b57ae51-89d3-4298-c4c0-b3936b0a97ac"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "     Unnamed: 0        Date    Station Area  ...        AH       MAV        CD\n",
+            "0             0  01/01/2013     Rathfarnham  ...  02:28:54  02:48:54  03:08:54\n",
+            "1             1  01/01/2013        Tallaght  ...  02:25:43  02:45:43  03:05:43\n",
+            "2             2  01/01/2013    North Strand  ...  04:11:20  04:31:20  04:51:20\n",
+            "3             3  01/01/2013        Tallaght  ...  04:50:48  05:10:48  05:30:48\n",
+            "4             4  01/01/2013         Finglas  ...  04:50:47  05:10:47  05:30:47\n",
+            "..          ...         ...             ...  ...       ...       ...       ...\n",
+            "142         169  05/01/2013   Dun Laoghaire  ...  00:30:00  00:50:00  01:10:00\n",
+            "143         170  05/01/2013    Phibsborough  ...  00:03:35  00:23:35  00:43:35\n",
+            "144         171  05/01/2013        Tallaght  ...  00:04:41  00:24:41  00:44:41\n",
+            "145         172  05/01/2013      Kilbarrack  ...  00:19:07  00:39:07  00:59:07\n",
+            "146         173  06/01/2013  Blanchardstown  ...  00:38:32  00:58:32  01:18:32\n",
+            "\n",
+            "[147 rows x 12 columns]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Run \"select\" sql query\n",
+        "cursor.execute('select * from AmbulanceBridgeData')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "IRCg9DGyv6C9",
+        "outputId": "c81f7840-3e99-4b27-a001-d3206181a805"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<sqlite3.Cursor at 0x7f087b6b4960>"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 66
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Fetch all AmbulanceBridgeData\n",
+        "AmbulanceBridgeData = cursor.fetchall()"
+      ],
+      "metadata": {
+        "id": "X_u1fFqJwE7F"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Display result \n",
+        "for row in AmbulanceBridgeData:\n",
+        "  print(row)\n"
+      ],
+      "metadata": {
+        "id": "srCgqlSvwZ7l",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "ca7f54ed-f05b-4101-ddb6-d44495a37355"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "('01/01/2013', 'Rathfarnham', 'S/S OTHER', '01:27:19', '01:28:58', '01:30:47', '01:58:54', '02:08:54', '02:28:54', '02:48:54', '03:08:54')\n",
+            "('01/01/2013', 'Tallaght', 'Fire CAR', '01:49:57', '01:50:40', '01:51:47', '01:55:43', '02:05:43', '02:25:43', '02:45:43', '03:05:43')\n",
+            "('01/01/2013', 'North Strand', 'S/S RTA', '03:35:24', '03:36:14', '03:38:28', '03:41:20', '03:51:20', '04:11:20', '04:31:20', '04:51:20')\n",
+            "('01/01/2013', 'Tallaght', 'Fire CAR', '04:12:51', '04:13:56', '04:14:32', '04:20:48', '04:30:48', '04:50:48', '05:10:48', '05:30:48')\n",
+            "('01/01/2013', 'Finglas', 'Fire DOM PER', '04:14:24', '04:15:36', '04:17:37', '04:20:47', '04:30:47', '04:50:47', '05:10:47', '05:30:47')\n",
+            "('01/01/2013', 'Tallaght', 'S/S OTHER', '04:54:30', '04:59:08', '05:02:07', '05:09:48', '05:19:48', '05:39:48', '05:59:48', '06:19:48')\n",
+            "('01/01/2013', 'Dun Laoghaire', 'Fire ALARM', '05:12:03', '05:15:00', '05:17:23', '05:25:13', '05:35:13', '05:55:13', '06:15:13', '06:35:13')\n",
+            "('01/01/2013', 'Tara St', 'Fire ALARM', '05:45:45', '05:47:55', '05:51:19', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('01/01/2013', 'Balbriggan', 'Fire ALARM', '05:59:23', '06:00:13', '06:03:34', '06:10:10', '06:20:10', '06:40:10', '07:00:10', '07:20:10')\n",
+            "('01/01/2013', 'Kilbarrack', 'Fire ALARM', '06:07:42', '06:08:51', '06:10:41', '06:13:47', '06:23:47', '06:43:47', '07:03:47', '07:23:47')\n",
+            "('01/01/2013', 'Dolphins Barn', 'S/S GRDASS', '06:25:31', '06:26:38', '06:28:58', '06:32:39', '06:42:39', '07:02:39', '07:22:39', '07:42:39')\n",
+            "('01/01/2013', 'Tara St', 'Fire HIGHRISE', '07:46:08', '07:46:57', '07:49:38', '07:52:22', '08:02:22', '08:22:22', '08:42:22', '09:02:22')\n",
+            "('01/01/2013', 'Blanchardstown', 'Fire CAR', '08:08:46', '08:09:54', '08:12:19', '08:16:20', '08:26:20', '08:46:20', '09:06:20', '09:26:20')\n",
+            "('01/01/2013', 'Kilbarrack', 'Fire CAR', '09:34:57', '09:36:33', '09:37:40', '09:44:22', '09:54:22', '10:14:22', '10:34:22', '10:54:22')\n",
+            "('01/01/2013', 'Balbriggan', 'Fire CAR', '12:29:22', '12:32:07', '12:33:41', '12:44:18', '12:54:18', '13:14:18', '13:34:18', '13:54:18')\n",
+            "('01/01/2013', 'Dun Laoghaire', 'Fire CHIMNEY', '12:36:48', '12:37:20', '12:38:56', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('01/01/2013', 'Tallaght', 'S/S RTA', '13:46:56', '13:47:34', '13:48:46', '13:50:35', '14:00:35', '14:20:35', '14:40:35', '15:00:35')\n",
+            "('01/01/2013', 'Kilbarrack', 'S/S OTHER', '14:55:07', '14:56:41', '14:59:09', '15:02:47', '15:12:47', '15:32:47', '15:52:47', '16:12:47')\n",
+            "('01/01/2013', 'Tallaght', 'Fire DOMESTIC', '15:08:32', '15:09:21', '15:10:26', '15:18:37', '15:28:37', '15:48:37', '16:08:37', '16:28:37')\n",
+            "('01/01/2013', 'Tallaght', 'Fire DOMESTIC', '15:13:42', '15:16:26', '15:17:46', '15:22:52', '15:32:52', '15:52:52', '16:12:52', '16:32:52')\n",
+            "('01/01/2013', 'Tallaght', 'Fire FIRE', '16:02:36', '16:03:42', '16:04:36', '16:08:27', '16:18:27', '16:38:27', '16:58:27', '17:18:27')\n",
+            "('01/01/2013', 'Balbriggan', 'Fire ALARM', '16:14:07', '16:14:48', '16:16:10', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('01/01/2013', 'Tara St', 'Fire SMALL', '16:15:22', '16:16:58', '16:19:19', '16:23:12', '16:33:12', '16:53:12', '17:13:12', '17:33:12')\n",
+            "('01/01/2013', 'Tallaght', 'Fire DOM PER', '17:40:14', '17:41:57', '17:42:44', '17:48:02', '17:58:02', '18:18:02', '18:38:02', '18:58:02')\n",
+            "('01/01/2013', 'Kilbarrack', 'Fire SMALL', '18:45:39', '18:47:12', '18:48:55', '18:51:14', '19:01:14', '19:21:14', '19:41:14', '20:01:14')\n",
+            "('01/01/2013', 'Tallaght', 'Fire DOMESTIC', '19:05:30', '19:07:13', '19:09:00', '19:14:17', '19:24:17', '19:44:17', '20:04:17', '20:24:17')\n",
+            "('01/01/2013', 'Tallaght', 'Fire CHIMNEY', '19:37:59', '19:38:49', '19:39:29', '19:45:15', '19:55:15', '20:15:15', '20:35:15', '20:55:15')\n",
+            "('01/01/2013', 'Dun Laoghaire', 'Fire CHIMNEY', '19:58:17', '19:59:40', '20:01:35', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('01/01/2013', 'Tara St', 'Fire SMALL', '20:19:00', '20:20:27', '20:22:42', '20:24:03', '20:34:03', '20:54:03', '21:14:03', '21:34:03')\n",
+            "('01/01/2013', 'Phibsborough', 'Fire CHIMNEY', '20:40:24', '20:41:19', '20:43:29', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('01/01/2013', 'Dolphins Barn', 'Fire SMALL', '20:44:06', '20:45:13', '20:47:05', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('01/01/2013', 'Dolphins Barn', 'Fire SMALL', '21:07:56', '21:08:27', None, '21:09:48', '21:19:48', '21:39:48', '21:59:48', '22:19:48')\n",
+            "('01/01/2013', 'Dolphins Barn', 'Fire DOMESTIC', '21:45:16', '21:47:16', '21:48:57', '21:51:24', '22:01:24', '22:21:24', '22:41:24', '23:01:24')\n",
+            "('01/01/2013', 'Donnybrook', 'Fire SMALL', '22:07:43', '22:09:30', '22:10:41', '22:14:26', '22:24:26', '22:44:26', '23:04:26', '23:24:26')\n",
+            "('01/01/2013', 'Finglas', 'Fire SMALL', '22:39:40', '22:41:06', '22:42:16', '22:45:56', '22:55:56', '23:15:56', '23:35:56', '23:55:56')\n",
+            "('01/01/2013', 'Tallaght', 'Fire ALARM', '22:45:34', '22:48:05', '22:49:48', '22:57:50', '23:07:50', '23:27:50', '23:47:50', '00:07:50')\n",
+            "('01/01/2013', 'Tallaght', 'Fire CAR', '23:20:24', '23:21:27', '23:23:28', '23:27:58', '23:37:58', '23:57:58', '00:17:58', '00:37:58')\n",
+            "('02/01/2013', 'Dolphins Barn', 'Fire SMALL', '00:38:28', '00:39:36', '00:41:17', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('02/01/2013', 'Finglas', 'Fire ALARM', '01:34:29', '01:36:09', '01:37:34', '01:38:57', '01:48:57', '02:08:57', '02:28:57', '02:48:57')\n",
+            "('02/01/2013', 'Tallaght', 'Fire CAR', '05:34:44', '05:35:33', '05:37:44', '05:49:29', '05:59:29', '06:19:29', '06:39:29', '06:59:29')\n",
+            "('02/01/2013', 'Swords', 'Fire ALARM', '08:39:50', '08:40:57', '08:42:13', '08:50:03', '09:00:03', '09:20:03', '09:40:03', '10:00:03')\n",
+            "('02/01/2013', 'Swords', 'S/S RTA', '11:42:36', '11:44:20', '11:45:25', '11:54:17', '12:04:17', '12:24:17', '12:44:17', '13:04:17')\n",
+            "('02/01/2013', 'Tallaght', 'Fire ALARM', '14:06:00', '14:07:00', '14:08:36', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('02/01/2013', 'Balbriggan', 'Fire CAR', '14:24:42', '14:26:01', '14:28:21', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('02/01/2013', 'Blanchardstown', 'S/S RTA', '14:35:08', '14:35:56', '14:37:00', '14:42:47', '14:52:47', '15:12:47', '15:32:47', '15:52:47')\n",
+            "('02/01/2013', 'Tallaght', 'Fire SMALL', '15:23:20', '15:24:51', '15:25:54', '15:40:27', '15:50:27', '16:10:27', '16:30:27', '16:50:27')\n",
+            "('02/01/2013', 'Tallaght', 'Fire SMALL', '15:24:59', '15:28:07', '15:28:59', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('02/01/2013', 'Tallaght', 'Fire DOMESTIC', '15:58:24', '15:59:01', '15:59:59', '16:06:12', '16:16:12', '16:36:12', '16:56:12', '17:16:12')\n",
+            "('02/01/2013', 'Tallaght', 'Fire CHIMNEY', '16:48:57', '16:52:30', '16:53:48', '17:05:01', '17:15:01', '17:35:01', '17:55:01', '18:15:01')\n",
+            "('02/01/2013', 'Dun Laoghaire', 'Fire SMALL', '19:02:49', '19:04:30', '19:05:56', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('02/01/2013', 'Phibsborough', 'S/S LCKOUT', '19:31:24', '19:34:27', '19:36:35', '19:40:37', '19:50:37', '20:10:37', '20:30:37', '20:50:37')\n",
+            "('02/01/2013', 'Tallaght', 'Fire SMALL', '19:54:10', '19:55:43', '19:58:43', '20:05:01', '20:15:01', '20:35:01', '20:55:01', '21:15:01')\n",
+            "('02/01/2013', 'Donnybrook', 'S/S RTA', '19:55:47', '19:56:48', '19:57:34', '20:03:11', '20:13:11', '20:33:11', '20:53:11', '21:13:11')\n",
+            "('02/01/2013', 'Tallaght', 'Fire ALARM', '20:30:15', '20:31:23', '20:31:57', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('02/01/2013', 'Tara St', 'S/S LCKOUT', '20:29:11', '20:34:15', '20:36:31', '20:40:51', '20:50:51', '21:10:51', '21:30:51', '21:50:51')\n",
+            "('02/01/2013', 'Kilbarrack', 'Fire SMALL', '20:38:49', '20:39:47', '20:41:24', '20:47:01', '20:57:01', '21:17:01', '21:37:01', '21:57:01')\n",
+            "('02/01/2013', 'Swords', 'Fire SMALL', '21:19:03', '21:19:47', '21:21:00', '21:26:52', '21:36:52', '21:56:52', '22:16:52', '22:36:52')\n",
+            "('02/01/2013', 'Rathfarnham', 'Fire DOMESTIC', '21:26:27', '21:27:47', '21:29:01', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('02/01/2013', 'Dolphins Barn', 'Fire ALARM', '21:27:47', '21:29:05', '21:29:44', '21:32:40', '21:42:40', '22:02:40', '22:22:40', '22:42:40')\n",
+            "('02/01/2013', 'Finglas', 'Fire CAR', '21:30:26', '21:31:26', '21:33:11', '21:38:33', '21:48:33', '22:08:33', '22:28:33', '22:48:33')\n",
+            "('02/01/2013', 'Finglas', 'Fire CHIMNEY', '22:08:59', '22:09:56', '22:11:59', '22:18:27', '22:28:27', '22:48:27', '23:08:27', '23:28:27')\n",
+            "('03/01/2013', 'Swords', 'Fire CAR', '00:31:53', '00:32:36', '00:34:06', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('03/01/2013', 'Tara St', 'Fire ALARM', '01:02:49', '01:04:12', '01:07:03', '01:10:27', '01:20:27', '01:40:27', '02:00:27', '02:20:27')\n",
+            "('03/01/2013', 'Finglas', 'Fire DOM PER', '02:04:25', '02:05:07', '02:06:43', '02:13:31', '02:23:31', '02:43:31', '03:03:31', '03:23:31')\n",
+            "('03/01/2013', 'Rathfarnham', 'Fire INSTIT', '02:49:45', '02:51:02', '02:53:07', '03:00:16', '03:10:16', '03:30:16', '03:50:16', '04:10:16')\n",
+            "('03/01/2013', 'North Strand', 'Fire ALARM', '03:28:28', '03:29:17', '03:31:41', '03:34:10', '03:44:10', '04:04:10', '04:24:10', '04:44:10')\n",
+            "('26/08/2013', 'Donnybrook', 'Fire DOMESTIC', '14:59:39', '15:01:05', '15:02:18', '15:06:22', '15:16:22', '15:36:22', '15:56:22', '16:16:22')\n",
+            "('03/01/2013', 'Phibsborough', 'Fire ALARM', '03:55:30', '03:56:27', '03:58:28', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('03/01/2013', 'Swords', 'Fire ALARM', '04:49:28', '04:51:02', '04:53:33', '04:58:10', '05:08:10', '05:28:10', '05:48:10', '06:08:10')\n",
+            "('03/01/2013', 'Kilbarrack', 'Fire ALARM', '07:29:13', '07:30:00', None, None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('03/01/2013', 'Dun Laoghaire', 'Fire INDUST', '08:43:33', '08:46:40', '08:48:31', '08:56:23', '09:06:23', '09:26:23', '09:46:23', '10:06:23')\n",
+            "('03/01/2013', 'Dun Laoghaire', 'Fire INDUST', '09:09:28', '09:13:10', '09:14:00', '09:18:08', '09:28:08', '09:48:08', '10:08:08', '10:28:08')\n",
+            "('03/01/2013', 'Phibsborough', 'Fire ALARM', '11:41:13', '11:42:14', '11:42:55', '11:44:13', '11:54:13', '12:14:13', '12:34:13', '12:54:13')\n",
+            "('03/01/2013', 'Rathfarnham', 'Fire DOMESTIC', '12:13:23', '12:14:00', '12:15:04', '12:18:46', '12:28:46', '12:48:46', '13:08:46', '13:28:46')\n",
+            "('03/01/2013', 'Swords', 'S/S RTA', '12:31:19', '12:32:06', '12:32:16', '12:36:37', '12:46:37', '13:06:37', '13:26:37', '13:46:37')\n",
+            "('03/01/2013', 'Tara St', 'Fire DOMESTIC', '14:26:42', '14:28:16', '14:29:25', '14:33:33', '14:43:33', '15:03:33', '15:23:33', '15:43:33')\n",
+            "('03/01/2013', 'Kilbarrack', 'Fire ALARM', '14:28:13', '14:29:13', '14:30:17', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('03/01/2013', 'Tallaght', 'S/S ELEC', '14:43:56', '14:45:43', '14:47:15', '14:52:58', '15:02:58', '15:22:58', '15:42:58', '16:02:58')\n",
+            "('03/01/2013', 'Blanchardstown', 'Fire DOM PER', '15:20:40', '15:21:40', '15:22:59', '15:26:50', '15:36:50', '15:56:50', '16:16:50', '16:36:50')\n",
+            "('03/01/2013', 'Finglas', 'Fire DOMESTIC', '15:39:20', '15:40:56', '15:41:11', '15:45:02', '15:55:02', '16:15:02', '16:35:02', '16:55:02')\n",
+            "('03/01/2013', 'Dun Laoghaire', 'Fire ALARM', '15:45:28', '15:46:49', '15:47:57', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('03/01/2013', 'Donnybrook', 'Fire ALARM', '17:18:45', '17:19:50', '17:21:10', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('03/01/2013', 'Tara St', 'S/S RTA', '17:24:36', '17:26:17', '17:26:56', '17:37:43', '17:47:43', '18:07:43', '18:27:43', '18:47:43')\n",
+            "('03/01/2013', 'Donnybrook', 'Fire ALARM', '18:54:53', '18:56:21', '18:57:46', '18:59:29', '19:09:29', '19:29:29', '19:49:29', '20:09:29')\n",
+            "('03/01/2013', 'Finglas', 'Fire ALARM', '19:00:00', '19:01:32', '19:02:48', '19:12:03', '19:22:03', '19:42:03', '20:02:03', '20:22:03')\n",
+            "('03/01/2013', 'Donnybrook', 'Fire ALARM', '19:49:11', '19:50:10', '19:51:29', '19:53:22', '20:03:22', '20:23:22', '20:43:22', '21:03:22')\n",
+            "('03/01/2013', 'Rathfarnham', 'Fire INDUST', '20:05:55', '20:06:49', '20:07:52', '20:14:37', '20:24:37', '20:44:37', '21:04:37', '21:24:37')\n",
+            "('03/01/2013', 'Tallaght', 'Fire SMALL', '21:55:01', '21:56:20', '21:57:39', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('03/01/2013', 'Dolphins Barn', 'S/S FLOOD', '22:31:24', '22:32:28', None, '22:37:34', '22:47:34', '23:07:34', '23:27:34', '23:47:34')\n",
+            "('03/01/2013', 'Dolphins Barn', 'Fire CAR', '22:36:39', '22:37:48', '22:39:32', '22:43:54', '22:53:54', '23:13:54', '23:33:54', '23:53:54')\n",
+            "('03/01/2013', 'Finglas', 'Fire SMALL', '22:38:41', '22:41:32', None, None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('03/01/2013', 'Tara St', 'Fire SMALL', '22:53:22', '22:54:24', '22:58:33', '22:59:20', '23:09:20', '23:29:20', '23:49:20', '00:09:20')\n",
+            "('03/01/2013', 'Finglas', 'Fire SMALL', '22:56:37', '22:57:52', '22:59:25', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('03/01/2013', 'Dolphins Barn', 'S/S FLOOD', '23:04:40', '23:06:47', '23:08:17', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('03/01/2013', 'Dolphins Barn', 'Fire DOMESTIC', '23:36:47', '23:37:30', '23:39:12', '23:42:33', '23:52:33', '00:12:33', '00:32:33', '00:52:33')\n",
+            "('04/01/2013', 'Kilbarrack', 'S/S AMBASS', '00:08:56', '00:10:46', '00:12:07', '00:16:55', '00:26:55', '00:46:55', '01:06:55', '01:26:55')\n",
+            "('04/01/2013', 'Dun Laoghaire', 'S/S AMBASS', '01:11:59', '01:14:40', '01:18:11', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('04/01/2013', 'Tallaght', 'Fire SMALL', '02:04:41', '02:05:22', '02:07:56', '02:16:48', '02:26:48', '02:46:48', '03:06:48', '03:26:48')\n",
+            "('04/01/2013', 'Dun Laoghaire', 'Fire DOMESTIC', '02:32:18', '02:35:51', '02:37:40', '02:43:20', '02:53:20', '03:13:20', '03:33:20', '03:53:20')\n",
+            "('04/01/2013', 'Phibsborough', 'Fire SMALL', '05:20:03', '05:21:07', '05:28:34', '05:29:45', '05:39:45', '05:59:45', '06:19:45', '06:39:45')\n",
+            "('04/01/2013', 'Kilbarrack', 'Fire FIRE', '06:04:24', '06:05:23', '06:07:10', '06:09:40', '06:19:40', '06:39:40', '06:59:40', '07:19:40')\n",
+            "('04/01/2013', 'Dolphins Barn', 'S/S RTA', '09:55:36', '09:56:28', '09:58:22', '10:01:05', '10:11:05', '10:31:05', '10:51:05', '11:11:05')\n",
+            "('04/01/2013', 'Kilbarrack', 'Fire SMALL', '13:15:15', '13:17:35', '13:31:24', '13:23:45', '13:33:45', '13:53:45', '14:13:45', '14:33:45')\n",
+            "('04/01/2013', 'Dolphins Barn', 'Fire SMALL', '13:55:05', '13:56:15', '13:57:38', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('04/01/2013', 'Kilbarrack', 'Fire CHIMNEY', '15:08:26', '15:09:11', '15:11:29', '15:16:34', '15:26:34', '15:46:34', '16:06:34', '16:26:34')\n",
+            "('04/01/2013', 'Skerries', 'Fire SMALL', '15:53:46', '15:57:15', '15:58:29', '16:09:19', '16:19:19', '16:39:19', '16:59:19', '17:19:19')\n",
+            "('04/01/2013', 'Kilbarrack', 'Fire CHIMNEY', '16:11:58', '16:12:41', '16:14:56', '16:17:00', '16:27:00', '16:47:00', '17:07:00', '17:27:00')\n",
+            "('04/01/2013', 'Tallaght', 'Fire CHIMNEY', '18:06:06', '18:07:00', '18:09:57', '18:21:07', '18:31:07', '18:51:07', '19:11:07', '19:31:07')\n",
+            "('04/01/2013', 'Kilbarrack', 'Fire CHIMNEY', '18:19:02', '18:20:10', '18:20:56', '18:30:20', '18:40:20', '19:00:20', '19:20:20', '19:40:20')\n",
+            "('04/01/2013', 'Dun Laoghaire', 'Fire CHIMNEY', '18:42:54', '18:43:40', '18:44:42', '18:56:09', '19:06:09', '19:26:09', '19:46:09', '20:06:09')\n",
+            "('04/01/2013', 'Dolphins Barn', 'S/S RTA', '18:44:58', '18:46:12', '18:47:01', '18:50:26', '19:00:26', '19:20:26', '19:40:26', '20:00:26')\n",
+            "('05/01/2013', 'Dun Laoghaire', 'S/S OTHER', '06:40:54', '06:43:50', '06:45:41', '06:51:16', '07:01:16', '07:21:16', '07:41:16', '08:01:16')\n",
+            "('05/01/2013', 'Dun Laoghaire', 'Fire DOMESTIC', '07:51:29', '07:52:12', '07:53:36', '07:58:59', '08:08:59', '08:28:59', '08:48:59', '09:08:59')\n",
+            "('05/01/2013', 'Donnybrook', 'Fire ALARM', '08:07:34', '08:09:38', '08:11:24', '08:14:35', '08:24:35', '08:44:35', '09:04:35', '09:24:35')\n",
+            "('05/01/2013', 'Dolphins Barn', 'S/S AMBASS', '08:36:59', '08:38:08', '08:39:39', '08:43:32', '08:53:32', '09:13:32', '09:33:32', '09:53:32')\n",
+            "('05/01/2013', 'North Strand', 'S/S LUAS', '09:50:28', '09:51:51', '09:52:41', '09:56:32', '10:06:32', '10:26:32', '10:46:32', '11:06:32')\n",
+            "('05/01/2013', 'North Strand', 'Fire INDUST', '09:50:51', '09:52:33', '09:53:38', '09:58:18', '10:08:18', '10:28:18', '10:48:18', '11:08:18')\n",
+            "('05/01/2013', 'Dun Laoghaire', 'Fire CHIMNEY', '10:14:31', '10:15:06', '10:15:29', '10:47:19', '10:57:19', '11:17:19', '11:37:19', '11:57:19')\n",
+            "('05/01/2013', 'Dun Laoghaire', 'Fire ALARM', '10:36:30', '10:38:13', '10:39:34', '10:42:35', '10:52:35', '11:12:35', '11:32:35', '11:52:35')\n",
+            "('05/01/2013', 'Dun Laoghaire', 'Fire DOMESTIC', '11:21:56', '11:23:12', '11:24:10', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('05/01/2013', 'Swords', 'Fire SMALL', '12:01:41', '12:02:31', '12:07:36', '12:09:05', '12:19:05', '12:39:05', '12:59:05', '13:19:05')\n",
+            "('05/01/2013', 'Donnybrook', 'S/S AMBASS', '13:08:43', '13:09:58', '13:11:01', '13:15:37', '13:25:37', '13:45:37', '14:05:37', '14:25:37')\n",
+            "('05/01/2013', 'Swords', 'S/S RTA', '13:20:08', '13:20:38', '13:20:40', '13:21:58', '13:31:58', '13:51:58', '14:11:58', '14:31:58')\n",
+            "('05/01/2013', 'Phibsborough', 'Fire DOM PER', '15:22:48', '15:23:51', '15:25:28', '15:28:33', '15:38:33', '15:58:33', '16:18:33', '16:38:33')\n",
+            "('05/01/2013', 'Finglas', 'Fire ALARM', '15:42:23', '15:44:57', '15:46:16', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('05/01/2013', 'Kilbarrack', 'Fire ALARM', '16:05:08', '16:06:18', '16:08:09', '16:13:04', '16:23:04', '16:43:04', '17:03:04', '17:23:04')\n",
+            "('05/01/2013', 'Phibsborough', 'Fire SMALL', '16:06:30', '16:07:34', '16:08:48', '16:15:02', '16:25:02', '16:45:02', '17:05:02', '17:25:02')\n",
+            "('05/01/2013', 'Tallaght', 'S/S OTHER', '16:34:01', '16:36:11', '16:37:25', '16:43:58', '16:53:58', '17:13:58', '17:33:58', '17:53:58')\n",
+            "('05/01/2013', 'Kilbarrack', 'S/S SGAS', '16:48:01', '16:50:24', '16:51:59', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('05/01/2013', 'Tallaght', 'Fire FIRE', '16:50:08', '16:51:56', '16:53:17', '17:06:33', '17:16:33', '17:36:33', '17:56:33', '18:16:33')\n",
+            "('05/01/2013', 'Tallaght', 'Fire SMALL', '17:29:56', '17:31:02', '17:33:24', '17:39:54', '17:49:54', '18:09:54', '18:29:54', '18:49:54')\n",
+            "('05/01/2013', 'Kilbarrack', 'Fire SMALL', '18:21:54', '18:23:30', '18:25:33', '18:31:13', '18:41:13', '19:01:13', '19:21:13', '19:41:13')\n",
+            "('05/01/2013', 'Donnybrook', 'Fire SMALL', '19:23:38', '19:24:40', '19:30:34', '19:30:41', '19:40:41', '20:00:41', '20:20:41', '20:40:41')\n",
+            "('05/01/2013', 'Blanchardstown', 'Fire SMALL', '19:24:53', '19:26:42', '19:27:49', '19:29:30', '19:39:30', '19:59:30', '20:19:30', '20:39:30')\n",
+            "('05/01/2013', 'Dun Laoghaire', 'Fire SMALL', '19:31:37', '19:32:45', '19:34:21', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('05/01/2013', 'North Strand', 'Fire CAR', '19:32:35', '19:33:19', '19:34:35', '19:37:24', '19:47:24', '20:07:24', '20:27:24', '20:47:24')\n",
+            "('05/01/2013', 'Balbriggan', 'Fire SMALL', '19:59:54', '20:01:02', '20:06:58', '20:12:55', '20:22:55', '20:42:55', '21:02:55', '21:22:55')\n",
+            "('05/01/2013', 'Dolphins Barn', 'Fire SMALL', '20:03:43', '20:04:59', '20:08:13', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('05/01/2013', 'Dun Laoghaire', 'S/S AMBASS', '20:53:54', '20:54:35', '20:55:52', '21:01:30', '21:11:30', '21:31:30', '21:51:30', '22:11:30')\n",
+            "('05/01/2013', 'Dun Laoghaire', 'Fire SMALL', '21:24:44', '21:25:56', '21:26:54', '21:34:27', '21:44:27', '22:04:27', '22:24:27', '22:44:27')\n",
+            "('05/01/2013', 'Phibsborough', 'Fire CHIMNEY', '21:43:34', '21:44:45', '21:46:53', '21:51:43', '22:01:43', '22:21:43', '22:41:43', '23:01:43')\n",
+            "('05/01/2013', 'Dun Laoghaire', 'S/S AMBASS', '22:05:04', '22:05:55', '22:07:14', '22:12:33', '22:22:33', '22:42:33', '23:02:33', '23:22:33')\n",
+            "('05/01/2013', 'Dun Laoghaire', 'S/S AMBASS', '23:03:21', '23:04:19', '23:05:40', None, '00:10:00', '00:30:00', '00:50:00', '01:10:00')\n",
+            "('05/01/2013', 'Phibsborough', 'Fire ALARM', '23:22:52', '23:23:23', '23:25:06', '23:33:35', '23:43:35', '00:03:35', '00:23:35', '00:43:35')\n",
+            "('05/01/2013', 'Tallaght', 'Fire CAR', '23:25:22', '23:27:11', '23:29:08', '23:34:41', '23:44:41', '00:04:41', '00:24:41', '00:44:41')\n",
+            "('05/01/2013', 'Kilbarrack', 'Fire SMALL', '23:43:23', '23:44:34', None, '23:49:07', '23:59:07', '00:19:07', '00:39:07', '00:59:07')\n",
+            "('06/01/2013', 'Blanchardstown', 'Fire CAR', '00:01:25', '00:03:57', '00:05:12', '00:08:32', '00:18:32', '00:38:32', '00:58:32', '01:18:32')\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Close connection to SQLite database\n",
+        "connection.close()\n"
+      ],
+      "metadata": {
+        "id": "loZiyVkYQ97j"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "name": "STEPHANIE AJEWE EJE Programming for Data Analysis CA 2",
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
